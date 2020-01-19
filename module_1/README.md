@@ -31,6 +31,8 @@ Generujemy projekt i powstałe archiwum rozpakowujemy. Na podstawie tego archiwu
 
 ![Prawidłowa konfiguracji projektu Spring Initializr](../media/Tworzenie_projektu.PNG)
 
+:hamster: [A tutaj znajdziesz startową wersję projektu](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/79134ecca449c993555a42121491fedfefcc6fe4/projects/honestit/demo)
+
 ---
 
 ### Zadanie 1.2. Utworzenie nowego projektu w IntelliJ
@@ -42,6 +44,8 @@ Należy pamiętać, aby w projekcie były ustawione następujące elementy:
 - katalog `src/main/java` oznaczony jako katalog ze źródłami (_Sources Root_),
 - katalog `src/main/resources` oznaczony jako katalog z zasobami (_Resources Root_),
 - utworzony katalog `src/main/webapp`, w którym będziemy tworzyć widoki JSP.
+
+:hamster: [Mam dla Ciebie skonfigurowany projekt z tymi wszystkimi pitu-pitu!](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/062f3feec0803529467bfd52b2974e69ce42239d/projects/honestit/demo)
 
 ---
 
@@ -71,6 +75,10 @@ Ze względu na to, że w projekcie będziemy wykorzystywać strony JSP, to musim
     ```
     
 [Rozwiązanie zadania](resolutions/1.3.md)
+
+:hamster: [Tutaj jest cały projekt, który udało nam się do tej pory ogarnąć](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/151319c76c5e7a24857969c513243fe136a45d51/projects/honestit/demo)
+
+:hamster: [... a tutaj sam plik pom.xml](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/blob/151319c76c5e7a24857969c513243fe136a45d51/projects/honestit/demo/pom.xml)
 
 ---
 
@@ -105,6 +113,10 @@ Kilka uwaga:
 Startujemy i ... czy uruchomienie aplikacji powiodło się?
 
 [Rozwiązanie zadania](resolutions/1.4.md)
+
+:hamster: [Cały projekt](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/d0b31c95b7be3fb756571dfc40c3049353f51495/projects/honestit/demo)
+
+:hamster: [... i taką stronę dorzuciłem!](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/blob/d0b31c95b7be3fb756571dfc40c3049353f51495/projects/honestit/demo/src/main/webapp/index.html)
 
 ---
 
@@ -160,6 +172,12 @@ Co stało się tym razem?
 
 [Rozwiązanie zadania](resolutions/1.5.md)
 
+:hamster: [Na tą chwilę projekt wygląda tak](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/d17c36e27e76d3f570b6f366052895078463432d/projects/honestit/demo)
+
+:hamster: [A sam plik application.properties tak](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/blob/d17c36e27e76d3f570b6f366052895078463432d/projects/honestit/demo/src/main/resources/application.properties)
+
+:hamster: [... chociaż potem potrzebował małej poprawki tutaj](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/44436c7fe11af0827158f2ccc87c38808850eabd)
+
 ---
 
 ### Zadanie 1.6. Konfiguracja użytkownika testowego w warstwie Security
@@ -186,6 +204,10 @@ Kolejny raz odpalmy aplikację i spróbujmy wejść na stronę [localhost:8080/i
 Tym razem już wszystko powinno zadziałać!
 
 [Rozwiązanie zadania](resolutions/1.6.md)
+
+:hamster: [Przynoszę aktualną wersję projektu!](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/233b2b1b704c91a774681455f2ba89428864c192/projects/honestit/demo)
+
+:hamster: [... a sam plik application.properties tak się zmienił](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/blob/233b2b1b704c91a774681455f2ba89428864c192/projects/honestit/demo/src/main/resources/application.properties)
 
 ---
 
