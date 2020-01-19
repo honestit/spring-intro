@@ -36,7 +36,7 @@ public class RegistrationController {
                 .password(passwordEncoder.encode(password))
                 .firstName(firstName)
                 .lastName(lastName)
-                .active(false)
+                .active(true)
                 .build();
 
         log.debug("Użytkownik do rejestracji: {}", user);
