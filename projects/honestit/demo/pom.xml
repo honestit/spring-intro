@@ -59,6 +59,13 @@
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
 
+        <!-- Zależnośc do biblioteki tagów Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>5.2.1.RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

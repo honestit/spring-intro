@@ -11,7 +11,7 @@ public class RegistrationController {
 
     @GetMapping
     public String prepareRegistrationPage() {
-        return "";
+        return "/WEB-INF/views/registration-form.jsp";
     }
 
     @PostMapping
