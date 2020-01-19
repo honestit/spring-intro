@@ -38,6 +38,10 @@ Po utworzeniu klasy możemy uruchomić aplikację. Ze względu na opcję `spring
 
 [Rozwiązanie zadania](resolutions/2.1.md)
 
+:hamster: [Tak wygląda teraz nasz projekt](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/be403a3b5ff3d8de2db69faa159857f266d90759/projects/honestit/demo)
+
+:hamster: [... a tutaj co pozmienialiśmy!](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/be403a3b5ff3d8de2db69faa159857f266d90759)
+
 ---
 
 ### Zadanie 2.2. Szkielet kontrolera Spring MVC
@@ -77,6 +81,10 @@ Obie metody zwracają wartość typu `String`, która ma reprezentować identyfi
 
 
 [Rozwiązanie zadania](resolutions/2.2.md)
+
+:hamster: [Całośc taka](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/3debfef1ee267bf51630b8073c1ce9bd605c2d8a/projects/honestit/demo)
+
+:hamster: [... a nasze zmiany tutaj](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/3debfef1ee267bf51630b8073c1ce9bd605c2d8a)
 
 ---
 
@@ -167,6 +175,10 @@ Powinniśmy teraz móc wejść na ścieżkę [localhost:8080/register](http://lo
 
 [Rozwiązanie zadania](resolutions/2.3.md)
 
+:hamster: [Jakbyś się zastanawiał/a jak wygląda nasz projekt, to tak](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/ecd81e02724823720ab57ac1a068efaed0aa1726/projects/honestit/demo)
+
+:hamster: [... a tutaj wszystko co nabroiliśmy](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/ecd81e02724823720ab57ac1a068efaed0aa1726)
+
 ---
 
 ### Zadanie 2.4. Obsługa rejestracji
@@ -254,6 +266,10 @@ Jeżeli chcemy sprawdzić czy operacja się powiodła, to możemy:
 > Zamiast dodawać ręcznie pole `log` możesz użyć adnotacji `@SLF4J` z biblioteki Lombok. Wtedy automatycznie będziesz miał w klasie pole `log`, które jest _loggerem_ bazującym na biblioteke _Simple Logging Facade For Java_
   
 [Rozwiązanie zadania](resolutions/2.4.md)
+
+:hamster: [Bardzo aktualna wersja projektu](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/659052d8e1b4ea7aed0e4636e7ab6b2371322c70/projects/honestit/demo)
+
+:hamster: [... i to co chomik nadłubał](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/659052d8e1b4ea7aed0e4636e7ab6b2371322c70)
   
 ---
   
@@ -294,6 +310,10 @@ Teraz przy przetestowaniu strony `/register` nasza aplikacja nie będzie od nas 
 
 [Rozwiązanie zadania](resolutions/2.5.md)
 
+:hamster: [Nasz projekt z lepszym security](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/9ec3afe98b4e9e4e0af8717a44a95eb096e14034/projects/honestit/demo)
+
+:hamster: [... i historia naszych zmian](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/9ec3afe98b4e9e4e0af8717a44a95eb096e14034)
+
 ---
 
 ### Zadanie 2.6. Szyfrowanie hasła
@@ -319,6 +339,10 @@ Teraz, w kontrolerze rejestracji możemy dorzucić pole typu `PasswordEncoder` i
 Możemy przetestować tą funkcjonalność rejestrując nowego użytkownika i weryfikując w bazie danych lub w logach aplikacji jak zostało zapisane jego hasło.
 
 [Rozwiązanie zadania](resolutions/2.6.md)
+
+:hamster: [Wszystko świeże świeżutkie!](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/30e6bcbc7e44ef2e5b916ffd7f1e4f967c4973f4/projects/honestit/demo)
+
+:hamster: [... a tutaj jak chomik szyfrował!](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/30e6bcbc7e44ef2e5b916ffd7f1e4f967c4973f4)
 
 ---
 
@@ -365,6 +389,10 @@ Przetestujmy teraz formularz logowania, aby zweryfikować czy możliwe jest już
 > Użytkownika testowego możemy usunąć z konfiguracji `application.properties` albo pozostawić na potrzeby ewentualnych testów.
 
 [Rozwiązanie zadania](resolutions/2.7.md)
+
+:hamster: [Teraz wszystko wygląda tak](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/4b50a14feeaa31611b22644f04a6b477b95721a8/projects/honestit/demo)
+
+:hamster: [... i w ten sposób udało się do tego dojść](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/4b50a14feeaa31611b22644f04a6b477b95721a8)
 
 ---
 
@@ -460,6 +488,10 @@ Ostatni element to formularz logowania czyli strona JSP. Możemy stworzyć stron
 Testujmy i cieszmy się działaniem!
 
 [Rozwiązanie zadania](resolutions/2.8.md)
+
+:hamster: [Nic dodaj nic ująć - wersja bieżąca](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/639ab6d3d3515c7dbc2063b0a6c5da866e3a0501/projects/honestit/demo)
+
+:hamster: [... i dowody że sam zrobiłem!](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/639ab6d3d3515c7dbc2063b0a6c5da866e3a0501)
 
 ---
 
