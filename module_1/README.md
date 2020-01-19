@@ -174,7 +174,7 @@ Co stało się tym razem?
 
 :hamster: [Na tą chwilę projekt wygląda tak](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/tree/d17c36e27e76d3f570b6f366052895078463432d/projects/honestit/demo)
 
-:hamster: [A sam plik application.properties tak](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/blob/d17c36e27e76d3f570b6f366052895078463432d/projects/honestit/demo/src/main/resources/application.properties)
+:hamster: [... a sam plik application.properties tak](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/blob/d17c36e27e76d3f570b6f366052895078463432d/projects/honestit/demo/src/main/resources/application.properties)
 
 :hamster: [... chociaż potem potrzebował małej poprawki tutaj](https://github.com/honestit/SDA_JAVA_WRO_23_SPRING_INTRO/commit/44436c7fe11af0827158f2ccc87c38808850eabd)
 
