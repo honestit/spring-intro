@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 
 <html>
 <head>
@@ -80,7 +80,13 @@
                         <td><b>${advert.title}</b></td>
                         <td>${advert.description}</td>
                         <td>
-                            <a href="/user-adverts?userId=${advert.owner.id}">${advert.owner.username}</a></td>
+                            <sec:authorize access="isAuthenticated()">
+                                <a href="/user-adverts?userId=${advert.owner.id}">${advert.owner.username}</a>
+                            </sec:authorize>
+                            <sec:authorize access="!isAuthenticated()">
+                                ${advert.owner.username}
+                            </sec:authorize>
+                        </td>
                         <td>${advert.posted.format(DateTimeFormatter.ISO_DATE_TIME)}</td>
                     </tr>
                 </c:forEach>
