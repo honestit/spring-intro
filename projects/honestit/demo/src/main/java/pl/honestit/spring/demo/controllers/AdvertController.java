@@ -12,6 +12,7 @@ import pl.honestit.spring.demo.model.repositories.UserRepository;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -47,5 +48,16 @@ public class AdvertController {
 
 
         return "redirect:" + redirectTo;
+    }
+
+    @PostMapping("/delete-advert")
+    public String processDeleteAdvert(Long advertId, Principal principal) {
+        String username = principal.getName();
+        log.debug("Usuwanie ogłoszenia o id {} dla użytkownika {}", advertId, username);
+
+        Optional<Advert> optionalAdvert = advertRepository.findByIdAndOwnerUsername(advertId, username);
+        optionalAdvert.ifPresent(advertRepository::delete);
+
+        return "redirect:/user-adverts";
     }
 }

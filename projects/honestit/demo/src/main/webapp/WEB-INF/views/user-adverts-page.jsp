@@ -81,7 +81,13 @@
                         <td><b>${advert.title}</b></td>
                         <td>${advert.description}</td>
                         <td>${advert.posted.format(DateTimeFormatter.ISO_DATE_TIME)}</td>
-                        <td></td>
+                        <td>
+                            <form method="post" action="/delete-advert">
+                                <button type="submit" class="btn btn-link">Usuń</button>
+                                <input type="hidden" name="advertId" value="${advert.id}"/>
+                                <sec:csrfInput/>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
