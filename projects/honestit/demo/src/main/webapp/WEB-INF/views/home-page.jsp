@@ -79,7 +79,8 @@
                         <td>${stat.count}</td>
                         <td><b>${advert.title}</b></td>
                         <td>${advert.description}</td>
-                        <td>${advert.owner.username}</td>
+                        <td>
+                            <a href="/user-adverts?userId=${advert.owner.id}">${advert.owner.username}</a></td>
                         <td>${advert.posted.format(DateTimeFormatter.ISO_DATE_TIME)}</td>
                     </tr>
                 </c:forEach>

@@ -27,7 +27,7 @@ public class AdvertController {
     }
 
     @PostMapping("/add-advert")
-    public String processAddAdvert(String title, String description, Principal principal, @RequestParam(required = false, defaultValue = "/") String redirectTo) {
+    public String processAddAdvert(String title, String description, Principal principal, @RequestParam(defaultValue = "/") String redirectTo) {
         String username = principal.getName();
         log.debug("Dodawanie ogłoszenia dla zalogowanego użytkownika: {}", username);
 
