@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.honestit.spring.demo.model.domain.Advert;
 import pl.honestit.spring.demo.model.domain.User;
 import pl.honestit.spring.demo.model.repositories.AdvertRepository;
@@ -26,7 +27,7 @@ public class AdvertController {
     }
 
     @PostMapping("/add-advert")
-    public String processAddAdvert(String title, String description, Principal principal) {
+    public String processAddAdvert(String title, String description, Principal principal, @RequestParam(required = false, defaultValue = "/") String redirectTo) {
         String username = principal.getName();
         log.debug("Dodawanie ogłoszenia dla zalogowanego użytkownika: {}", username);
 
@@ -44,6 +45,7 @@ public class AdvertController {
         advertRepository.save(advert);
         log.debug("Zapisane ogłoszenie: {}", advert);
 
-        return "redirect:/";
+
+        return "redirect:" + redirectTo;
     }
 }
