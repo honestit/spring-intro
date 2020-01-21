@@ -21,6 +21,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<jsp:include page="fragments/main-menu.jsp"/>
 <div class="container">
 
     <sec:authorize access="isAuthenticated()">
