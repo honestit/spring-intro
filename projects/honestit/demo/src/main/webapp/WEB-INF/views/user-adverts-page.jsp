@@ -82,11 +82,18 @@
                         <td>${advert.description}</td>
                         <td>${advert.posted.format(DateTimeFormatter.ISO_DATE_TIME)}</td>
                         <td>
-                            <form method="post" action="/delete-advert">
-                                <button type="submit" class="btn btn-link">Usuń</button>
-                                <input type="hidden" name="advertId" value="${advert.id}"/>
-                                <sec:csrfInput/>
-                            </form>
+                            <div class="btn-group">
+                                <form class="form-inline" method="post" action="/delete-advert">
+                                    <button type="submit" class="btn btn-danger">Usuń</button>
+                                    <input type="hidden" name="advertId" value="${advert.id}"/>
+                                    <sec:csrfInput/>
+                                </form>
+                                <form class="form-inline" style="margin-left: 1em" method="get" action="/edit-advert">
+                                    <button type="submit" class="btn btn-primary">Edytuj</button>
+                                    <input type="hidden" name="advertId" value="${advert.id}"/>
+                                    <sec:csrfInput/>
+                                </form>
+                        </div>
                         </td>
                     </tr>
                 </c:forEach>
