@@ -85,4 +85,12 @@ W ramach zadań zrealizujemy dalszy zestaw funkcjonalności związany z obsług�
 
 ---
 
+## Moduł 4. Rozszerzenia architektoniczne i technologiczne
+
+W ramach tej dodatkowej sekcji zrealizujemy zestaw rozszerzeń projektu, które w pierwszej kolejności będą poprawiały architekturę naszej aplikacji (rozszerzały ją), a w drugiej wprowadzały dodatkowe zagadnienia techniczne usprawniające i czyniące cały projekt bardziej atrakcyjny _w oczach innego programisty_.
+
+[Rozpocznij pracę z modułem](module_4/README.md)
+
+---
+
 ### Dziękuję za wspólną pracę ;)
