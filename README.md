@@ -1,30 +1,56 @@
-# Intro Into Spring
+# Spring Intro
 
-Repozytorium warsztatowe z zadaniami wprowadzającymi do framework'u Spring
+Repozytorium warsztatowe z zadaniami wprowadzającymi do świata Springa (dla Spring Framework 5 i Spring Boot 2)
 
 ---
 
-## Nota prawna
+## O repozytorium
 
-Drogi użytkowniku. Ze względu na ochronę wartości intelektualnej zachęcam Cię, abyś na wstępie zapoznał się z poniższą notą prawną dotyczącą repozytorium. Uzyskałeś dostęp do repozytorium i tym samym poniższe zapisy w całości Cię dotyczą. Proszę Cię o współpracę w ochronie tej wartości i przestrzeganie niżej opisanych zasad. Dziękuję.
+Drogi Użytkowniku, repozytorium z którego korzystasz jest w pełni darmowe i dostęp do niego do niczego Cię nie zobowiązuje. Repozytorium to jest efektem ciężkiej pracy autora i kilku lat doświadczeń w prowadzeniu zajęć ze Spring Framework w polskich szkołach programowania. Było najwyżej oceniane przez wielu uczestników szkoleń i ze wszystkich w ten sposób przeze mnie przygotowanych zasłużyło na miano ... arcyrepozytorium :)
 
-> Repozytorium, jego treść i zawartość podlegają ochronie prawnej. Wykorzystywanie materiałów zawartych w repozytorium może odbywać się tylko za zgodą autora.
+---
 
-> Repozytorium udostępniane jest wybranym osobom i tylko przez te osoby może być wykorzystywane. Dalsze rozpowszechnianie i/lub kopiowanie repozytorium bez zgody autora, w całości lub we fragmentach, jest zabronione.
+## O autorze
 
-> Autorem i właścicielem repozytorium jest Michał Kupisiński Honest IT Consulting. 
+Nazywam się Michał i od 20 lat programuję w języku Java. Od 9 lat robię to zawodowo. Pracowałem zarówno ze stosem technologicznym Java EE (5/6/7) jak i Spring (4/5). Od ponad dwóch lat jestem trenerem programowania ... podobno jednym z najlepszych w Polsce :)
 
-> Repozytorium oraz każda jego kopia (fork) muszą zachować powyższą notę prawną.
+Więcej o moich doświadczeniach dowiesz się tutaj: [LinkedIn](www.linkedin.com/in/michal-kupisinski)
+
+---
+
+## Wspomóż
+
+Jednym z najbardziej wymagających uczniów jakich miałem w życiu była moja żona. Nie koniecznie przez opór materiału i trudności komunikacyjne, ale przez brak czasu na Jej nauczanie. Nasza rodzina nie kończy się na naszej dwójce :) Stąd jedyny sposób, aby mogła się nauczyć programowania było przygotowanie dla Niej materiałów do nauki, najlepszych na świecie. Efekt wspólnego wysiłku zamknęliśmy ostatecznie w kursie z podstaw programowania. Bez wątpienia najlepszym jaki jest :)
+
+Jeżeli uważasz, że taki kurs mógłby być dla Ciebie pomocny albo znasz kogoś dla kogo byłby pomocny (szczególnie na początku drogi), to skorzystaj lub poleć poniższy link:
+
+[Promocja: 50 godzin materiału najlepszej jakości w cenie 4 x CD-Action = 48,99 PLN](https://www.udemy.com/course/programowanie-w-javie-solidne-fundamenty/?couponCode=PROMOCJA-URODZINOWA) <- Promocja ważna do 3 czerwca 2020
+
+**Dziękuję za Twoje wsparcie i życzę Ci miłej pracy z tym repozytorium**
+
+---
+
+## Błędy i poprawki
+
+Repozytorium może zawierać drobne błędy... były one wprowadzane specjalnie, aby móc o nich dyskutować w trakcie zajęć stacjonarnych. Obecny tryb udostępnienia repozytorium nie umożliwia takiej pracy, więc błędy są eliminowane... ale jakieś drobne może gdzieś pozostały. Jak będę miał pewność, że nie ma już żadnych to tą notę usunę.
+
+---
+
+## Zmiany
+
+Repozytorium w ciągu najbliższych dni i tygodni będzie uzupełniane o brakujące rozwiązania i prawdopodobnie dalsze rozszerzenia. Bądź czujny i zaglądaj tutaj co jakiś czas :)
 
 ---
 
 ## Przygotowanie repozytorium
 
-1. Repozytorium należy w pierwszej kolejności sklonować na swój komputer przy pomocy polecenia `git clone`.
-1. Projekt, który jest opisany w repozytorium należy zrealizować w katalogu `project`.
-1. Każdy krok z poszczególnych zadań powinien kończyć się wykonaniem `git commit` (można częściej).
+1. Repozytorium należy w pierwszej kolejności sforkować na swoje konto.
+1. Utworzony fork należy skolonować poleceniem `git clone adres_twojego_forka`
 
-> Jeżeli posiadasz konto na `github.com`, to możesz wykonać `fork` tego repozytorium i również wrzucać swoje zmiany `git push` do swojego `fork'a`. Pamiętaj tylko, aby wcześniej sklonować właśnie swój `fork` a nie repozytorium główne.
+   > Możesz też sklonować bezpośrednio główne repozytorium ale wtedy możliwa jest tylko praca lokalna na komputerze z repozytorium
+   
+1. Projekt, który jest opisany w repozytorium należy zrealizować w katalogu `project`.
+1. W katalogu `project` znajduje się również referencyjny projekt (`honestit/demo`), który możesz śmiało wykorzystać.
 
 ---
 
@@ -44,12 +70,15 @@ Aplikacja będzie zawierała następujący zestaw funkcjonalności:
    1. Lista wszystkich ogłoszeń zalogowanego użytkownika
    1. Lista wszystkich ogłoszeń wybranego użytkownika
    
+... i więcej!
+   
 W trakcie prac nad tą prostą aplikacją wprowadzimy sobie podstawowe zagadnienia i techniki związane z:
 1. **Spring Core/Context** - do obsługi wstrzykiwania zależności (IoC/DI),
 1. **Spring MVC** - do obsługi żądań protokołu HTTP, w architekturze MVC,
 1. **Spring Boot** - do szybkiego startu i automatycznej konfiguracji projektu,
 1. **Spring Data JPA** - do integracji ze standardem JPA i obsługi warstwy bazodanowej,
 1. **JSP** - do generowania dynamicznych widoków.
+1. **Spring Security** - do obsługi warstwy bezpieczeństwa
 
 ---
 
