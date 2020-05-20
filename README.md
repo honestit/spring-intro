@@ -28,6 +28,8 @@ Jeżeli uważasz, że taki kurs mógłby być dla Ciebie pomocny albo znasz kogo
 
 [Promocja: 50 godzin materiału najlepszej jakości w cenie 4 x CD-Action = 48,99 PLN](https://www.udemy.com/course/programowanie-w-javie-solidne-fundamenty/?couponCode=PROMOCJA-URODZINOWA) <- Promocja ważna do 3 czerwca 2020
 
+![Solidne-fundamenty](media/Programowanie-w-javie-solidne-fundamenty.jpg)
+
 **Dziękuję za Twoje wsparcie i życzę Ci miłej pracy z tym repozytorium**
 
 ---
