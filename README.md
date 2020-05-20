@@ -16,7 +16,7 @@ Jeżeli Ci się spodoba i zaczniesz z niego korzystać to daj proszę gwiazdkę 
 
 Nazywam się Michał i od 20 lat programuję w języku Java. Od 9 lat robię to zawodowo. Pracowałem zarówno ze stosem technologicznym Java EE (5/6/7) jak i Spring (4/5). Od ponad dwóch lat jestem trenerem programowania ... podobno jednym z najlepszych w Polsce :)
 
-Więcej o moich doświadczeniach dowiesz się tutaj: [LinkedIn](www.linkedin.com/in/michal-kupisinski)
+Więcej o moich doświadczeniach dowiesz się tutaj: [LinkedIn](https://www.linkedin.com/in/michal-kupisinski)
 
 ---
 
