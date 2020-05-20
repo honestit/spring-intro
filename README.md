@@ -8,6 +8,8 @@ Repozytorium warsztatowe z zadaniami wprowadzającymi do świata Springa (dla Sp
 
 Drogi Użytkowniku, repozytorium z którego korzystasz jest w pełni darmowe i dostęp do niego do niczego Cię nie zobowiązuje. Repozytorium to jest efektem ciężkiej pracy autora i kilku lat doświadczeń w prowadzeniu zajęć ze Spring Framework w polskich szkołach programowania. Było najwyżej oceniane przez wielu uczestników szkoleń i ze wszystkich w ten sposób przeze mnie przygotowanych zasłużyło na miano ... arcyrepozytorium :)
 
+Jeżeli Ci się spodoba i zaczniesz z niego korzystać to daj proszę gwiazdkę (_star na górze_) i dorzuć łacza (_watch na górze_), aby niczego nowego nie przegapić!
+
 ---
 
 ## O autorze
