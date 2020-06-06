@@ -26,7 +26,7 @@ Jednym z najbardziej wymagających uczniów jakich miałem w życiu była moja �
 
 Jeżeli uważasz, że taki kurs mógłby być dla Ciebie pomocny albo znasz kogoś dla kogo byłby pomocny (szczególnie na początku drogi), to skorzystaj lub poleć poniższy link:
 
-[Promocja: 50 godzin materiału najlepszej jakości w cenie 4 x CD-Action = 48,99 PLN](https://www.udemy.com/course/programowanie-w-javie-solidne-fundamenty/?couponCode=PROMOCJA-URODZINOWA) <- Promocja ważna do 3 czerwca 2020
+[Promocja: 50 godzin materiału najlepszej jakości w cenie 4 x CD-Action = 48,99 PLN](https://www.udemy.com/course/programowanie-w-javie-solidne-fundamenty/?couponCode=9BDD279891B9C7B313E5) <- Promocja ważna do 3 czerwca 2020
 
 ![Solidne-fundamenty](media/Programowanie-w-javie-solidne-fundamenty.jpg)
 
