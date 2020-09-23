@@ -11,8 +11,7 @@ public class RegistrationController {
 
     @GetMapping // obsługuje żądanie typu GET
     public String prepareRegistrationPage() {
-        // TODO
-        return ""; // metoda ma zwracać identyfikator widoku (JSP)
+        return "/WEB-INF/views/registration-form.jsp"; // metoda ma zwracać identyfikator widoku (JSP)
     }
 
     @PostMapping // obsługuje żądanie typu POST
