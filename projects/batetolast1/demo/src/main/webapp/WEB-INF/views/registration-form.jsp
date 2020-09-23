@@ -48,7 +48,7 @@
                     </div>
                     <button class="btn btn-primary" type="submit">Zarejestruj</button>
                     <button class="btn btn-secondary" type="reset">Wyczyść dane</button>
-                    <sec:csrfInput/>
+                    <sec:csrfInput/> <%-- tag chroniący przed atakami typu CSRF --%>
                 </form>
             </div>
             <div class="col-5"></div>
