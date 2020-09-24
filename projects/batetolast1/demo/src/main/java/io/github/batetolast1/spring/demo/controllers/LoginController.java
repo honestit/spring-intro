@@ -34,7 +34,7 @@ public class LoginController {
         if (user == null) throw new UsernameNotFoundException(username);
 
         if (passwordEncoder.matches(password, user.getPassword())) {
-            return "redirect:index.html";
+            return "redirect:/";
         } else {
             return "redirect:/login";
         }

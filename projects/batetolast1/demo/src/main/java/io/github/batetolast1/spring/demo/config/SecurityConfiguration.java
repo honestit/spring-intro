@@ -29,28 +29,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter { // dod
     @Override
     protected void configure(HttpSecurity security) throws Exception { // nadpisując metodę configure() podajemy konfigurację bezpieczeństwa
         security.authorizeRequests()
-                // podajemy ścieżkę do wejścia
-                .antMatchers("/register")
-                // pozwalamy na nią wejść wszystkim użytkownikom
-                .permitAll()
-                // każde inne żądanie musi być poprzedzone logowaniem
-                .antMatchers("/login")
-                .anonymous()
-                // zabezpieczenie innych ścieżek tylko dla zalogowanych użytkowników
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/").permitAll() // podajemy ścieżkę do strony głównej, żeby każdy mógł na nią wejść
+                .antMatchers("/register").anonymous() // pozwalamy wejść na /register wszystkim niezalogowanym użytkownikom
+                .antMatchers("/login").anonymous()
+                .anyRequest().authenticated()  // zabezpieczenie innych ścieżek tylko dla zalogowanych użytkowników - każde inne żądanie musi być poprzedzone logowaniem
                 .and()
                 // aktywowanie logowania przez automatyczny formularz logowania Spring Security
                 .formLogin()
                 // wskazanie ścieżki logowania obsługiwanej przez kontroler
                 .loginPage("/login")
-                // podajemy domyślną stronę sukcesu po logowaniu
-                .defaultSuccessUrl("/index.html")
+                // podajemy domyślną ścieżkę do kontrolera po udanym logowaniu
+                .defaultSuccessUrl("/")
                 .and()
                 // aktywujemy wylogowywanie automatycznie przeprowadzane przez Spring Security
                 .logout()
-                // podajemy domyślną stronę sukcesu po wylogowaniu
-                .logoutSuccessUrl("/index.html");
+                // podajemy domyślną ścieżkę do kontrolera po udanym wylogowaniu
+                .logoutSuccessUrl("/");
 
         // w chainie przekazujemy obiekt klasy HttpSecurity
     }
