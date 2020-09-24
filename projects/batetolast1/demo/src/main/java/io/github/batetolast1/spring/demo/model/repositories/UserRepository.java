@@ -4,6 +4,7 @@ import io.github.batetolast1.spring.demo.model.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+    // User findByUsername(String username);
 }
 
 // interfejs JpaRepository automatycznie dostarcza implementację DAO w standardzie JPA dla encji User, tworząc repozytorium na podstawie modułu Spring Data JPA

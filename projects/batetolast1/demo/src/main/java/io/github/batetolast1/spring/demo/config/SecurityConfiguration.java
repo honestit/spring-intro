@@ -34,11 +34,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter { // dod
                 // pozwalamy na nią wejść wszystkim użytkownikom
                 .permitAll()
                 // każde inne żądanie musi być poprzedzone logowaniem
+                .antMatchers("/login")
+                .anonymous()
+                // zabezpieczenie innych ścieżek tylko dla zalogowanych użytkowników
                 .anyRequest()
                 .authenticated()
                 .and()
                 // aktywowanie logowania przez automatyczny formularz logowania Spring Security
                 .formLogin()
+                // wskazanie ścieżki logowania obsługiwanej przez kontroler
+                .loginPage("/login")
                 // podajemy domyślną stronę sukcesu po logowaniu
                 .defaultSuccessUrl("/index.html")
                 .and()
