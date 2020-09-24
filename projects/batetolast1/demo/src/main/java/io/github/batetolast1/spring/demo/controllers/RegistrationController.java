@@ -2,6 +2,7 @@ package io.github.batetolast1.spring.demo.controllers;
 
 import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller // tworzy komponent typu kontroler Spring MVC (odpowiednik servletu)
 @RequestMapping("/register") // mapuje kontroler na wskazaną ścieżkę
+@Log4j2 // dodanie pola log z loggerem Log4j2 do klasy
 public class RegistrationController {
 
     private final UserRepository userRepository;
@@ -40,9 +42,10 @@ public class RegistrationController {
                 .lastName(lastName)
                 .active(false)
                 .build();
-
-        user = userRepository.save(user);
-
+        log.info("User to register: {}", user);
+        
+        userRepository.save(user);
+        log.info("Registered user: {}", user);
         return "redirect:/index.html";
     }
 }
