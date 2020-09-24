@@ -4,6 +4,7 @@ import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegistrationController {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired // wstrzykujemy obiekt interfesju UserRepository do kontrolera (wzorzec Dependency Injection)
-    public RegistrationController(UserRepository userRepository) { // korzystamy z zalecanej opcji wstrzyknięcia przez konstruktor
+    @Autowired // wstrzykujemy obiekt interfejsu UserRepository do kontrolera (wzorzec Dependency Injection)
+    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) { // korzystamy z zalecanej opcji wstrzyknięcia przez konstruktor
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder; // wstrzykujemy również obiekt klasy DelegatingPasswordEncoder, pozwalający na szyfrowanie hasła
     }
 
     // inne dostępne opcje dla wstrzyknięć
@@ -37,13 +40,13 @@ public class RegistrationController {
                                           String lastName) {
         User user = User.builder()
                 .username(username)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .firstName(firstName)
                 .lastName(lastName)
                 .active(false)
                 .build();
         log.info("User to register: {}", user);
-        
+
         userRepository.save(user);
         log.info("Registered user: {}", user);
         return "redirect:/index.html";
