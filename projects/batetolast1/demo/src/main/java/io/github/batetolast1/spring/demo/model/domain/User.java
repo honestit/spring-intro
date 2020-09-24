@@ -1,5 +1,6 @@
 package io.github.batetolast1.spring.demo.model.domain;
 
+import com.sun.xml.bind.v2.TODO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -39,4 +40,6 @@ public class User {
     // czy użytkownik jest aktywny
     @Column(nullable = false) // pole nie może być puste
     private boolean active;
+
+    //TODO add @OneToMany with mappedBy to future List<Advert>, add (fetch = FetchType.LAZY) (https://www.baeldung.com/jpa-join-column)?
 }
