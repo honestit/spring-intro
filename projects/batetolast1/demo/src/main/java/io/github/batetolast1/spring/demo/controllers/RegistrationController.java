@@ -43,7 +43,7 @@ public class RegistrationController {
                 .password(passwordEncoder.encode(password))
                 .firstName(firstName)
                 .lastName(lastName)
-                .active(false)
+                .active(true) // pozwalamy nowemu użytkownikowi od razu się zalogować
                 .build();
         log.info("User to register: {}", user);
 
