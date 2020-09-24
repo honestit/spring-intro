@@ -15,17 +15,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @ToString(exclude = "password")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(of = "id")
 public class User {
     // ID
     @Id // pole klucza głównego
     @GeneratedValue(strategy = GenerationType.IDENTITY) // pozwala na automatyczne generowanie wartości klucza głównego
-    @EqualsAndHashCode.Include
     private Long id;
 
     // nazwa użytkownika
     @Column(unique = true, nullable = false) // nazwa użytkownika musi być unikalna i nie może być pusta
-    @EqualsAndHashCode.Include
     private String username;
 
     // hasło
