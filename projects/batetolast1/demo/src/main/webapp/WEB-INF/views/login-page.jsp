@@ -16,6 +16,9 @@
     <title>Login</title>
 </head>
 <body>
+
+    <jsp:include page="main-menu.jsp"/>
+
     <div class="container">
         <div class="row">
             <div class="col-1"></div>

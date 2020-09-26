@@ -17,6 +17,8 @@
 </head>
 <body>
 
+    <jsp:include page="main-menu.jsp"/>
+
     <div class="container">
 
         <sec:authorize access="isAuthenticated()">
