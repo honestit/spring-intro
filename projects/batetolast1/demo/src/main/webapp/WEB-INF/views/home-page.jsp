@@ -19,21 +19,35 @@
 
     <div class="container">
 
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-6"><h2>Dodaj ogłoszenie</h2></div>
-            <div class="col-5"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
-
-                <%-- Tutaj formularz dodawania nowego ogłoszenia (PÓŹNIEJ) --%>
-
+        <sec:authorize access="isAuthenticated()">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-6"><h2>Dodaj ogłoszenie</h2></div>
+                <div class="col-5"></div>
             </div>
-            <div class="col-2"></div>
-        </div>
+
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <form method="post" action="/add-advert">
+                        <div class="form-group">
+                            <label for="title">Tytuł</label>
+                            <input type="text" required name="title" id="title" class="form-control"
+                                   placeholder="Podaj tytuł ogłoszenia"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Opis</label>
+                            <textarea required name="description" id="description" class="form-control"
+                                      placeholder="Podaj opis"></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Zarejestruj</button>
+                        <button class="btn btn-secondary" type="reset">Wyczyść dane</button>
+                        <sec:csrfInput/> <%-- tag chroniący przed atakami typu CSRF --%>
+                    </form>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </sec:authorize>
 
         <div class="row">
             <div class="col-1"></div>
