@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="col-1"></div>
-            <div class="col-6"><h2>Lista Twoich ogłoszeń</h2></div>
+            <div class="col-6"><h2>Lista ogłoszeń użytkownika ${userAvertsUsername}</h2></div>
             <div class="col-5"></div>
         </div>
 

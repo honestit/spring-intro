@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Log4j2
@@ -27,11 +29,26 @@ public class UserAdvertsController {
     }
 
     @GetMapping("/user-adverts")
-    public String getUserAdverts(Model model, Principal principal) {
+    public String getUserAdverts(Principal principal, Model model) {
         String username = principal.getName();
         User user = userRepository.findByUsername(username);
         List<Advert> userAdverts = advertRepository.findAllByUserOrderByPostedDesc(user);
         model.addAttribute("userAdverts", userAdverts);
+        model.addAttribute("userAvertsUsername", username);
         return "/WEB-INF/views/user-adverts-page.jsp";
+    }
+
+    @GetMapping("/user-adverts/{id:\\d+}")
+    public String getUserAdverts(@PathVariable Long id, Model model) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            List<Advert> userAdverts = advertRepository.findAllByUserOrderByPostedDesc(user);
+            model.addAttribute("userAdverts", userAdverts);
+            model.addAttribute("userAvertsUsername", user.getUsername());
+            return "/WEB-INF/views/user-adverts-page.jsp";
+        } else {
+            return "redirect:/"; // TODO redirect to 404
+        }
     }
 }

@@ -75,7 +75,9 @@
                             <td class="col-1">${counter.index + 1}</td>
                             <td class="col-2">${advert.title}</td>
                             <td class="col-5">${advert.description}</td>
-                            <td class="col-2">${advert.user.username}</td>
+                            <td class="col-2">
+                                <a href="/user-adverts/${advert.user.id}">${advert.user.username}</a>
+                            </td>
                             <td class="col-2">${advert.posted}</td>
                         </tr>
                     </c:forEach>
