@@ -10,9 +10,10 @@
                 <a class="nav-link btn btn-outline-info" role="button" href="/">
                     <span class="text-lg-left">Strona główna</span></a>
             </li>
-            <sec:authorize access="isAuthenticated()">
-                <%-- Sekcje główne menu dostępne tylko dla zalogowanych użytkowników --%>
-            </sec:authorize>
+            <li class="nav-item active mx-1">
+                <a class="nav-link btn btn-outline-info" role="button" href="/">
+                    <span class="text-lg-left">Twoje ogłoszenia</span></a>
+            </li>
         </ul>
     </div>
 
