@@ -33,6 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter { // dod
                 .antMatchers("/register").anonymous() // pozwalamy wejść na /register wszystkim niezalogowanym użytkownikom
                 .antMatchers("/login").anonymous()
                 .anyRequest().authenticated()  // zabezpieczenie innych ścieżek tylko dla zalogowanych użytkowników - każde inne żądanie musi być poprzedzone logowaniem
+                // dzięki temu zawsze uzyskamy nie-nullowy obiekt klasy Principal
                 .and()
                 // aktywowanie logowania przez automatyczny formularz logowania Spring Security
                 .formLogin()
