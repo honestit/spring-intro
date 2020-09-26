@@ -10,10 +10,12 @@
                 <a class="nav-link btn btn-outline-info" role="button" href="/">
                     <span class="text-lg-left">Strona główna</span></a>
             </li>
-            <li class="nav-item active mx-1">
-                <a class="nav-link btn btn-outline-info" role="button" href="/">
-                    <span class="text-lg-left">Twoje ogłoszenia</span></a>
-            </li>
+            <sec:authorize access="isAuthenticated()">
+                <li class="nav-item active mx-1">
+                    <a class="nav-link btn btn-outline-info" role="button" href="/user-adverts">
+                        <span class="text-lg-left">Twoje ogłoszenia</span></a>
+                </li>
+            </sec:authorize>
         </ul>
     </div>
 
@@ -23,10 +25,10 @@
         <div style="margin-right: 20px">
             Witaj, <strong>nieznajomy</strong>
         </div>
-        <form class="form-inline mr-2 mt-3" method="get" action="/login">
-            <button class="btn btn-outline-primary" type="submit">Zaloguj</button>
-            <sec:csrfInput/>
-        </form>
+        <a class="btn btn-outline-success" style="margin-right: 20px" role="button" href="/register">
+            <span class="text-lg-left">Zarejestruj</span></a>
+        <a class="btn btn-outline-primary" role="button" href="/login">
+            <span class="text-lg-left">Zaloguj</span></a>
     </sec:authorize>
 
     <%-- Sekcja dostępna tylko dla zalogowanych użytkowników --%>
@@ -41,8 +43,4 @@
         </form>
     </sec:authorize>
 
-    <form class="form-inline mt-3" method="get" action="/register">
-        <button class="btn btn-outline-success" type="submit">Zarejestruj</button>
-        <sec:csrfInput/>
-    </form>
 </nav>
