@@ -62,8 +62,35 @@ public class UserAdvertsController {
             String username = principal.getName();
             User user = userRepository.findByUsername(username);
             if (user.getId().equals(advert.getUserId())) {
-                advertRepository.deleteById(advertId);
+                advertRepository.delete(advert);
             }
+        }
+        return "redirect:/user-adverts";
+    }
+
+    @GetMapping("/edit-advert")
+    public String editAdvert(Long advertId, Principal principal, Model model) {
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username);
+        Advert advert = advertRepository.getOne(advertId);
+
+        if (advert.getUserId().equals(user.getId())) {
+            model.addAttribute("editedAdvert", advert);
+            return "/WEB-INF/views/edit-advert-form.jsp";
+        }
+        return "redirect:/user-adverts";
+    }
+
+    @PostMapping("/edit-advert")
+    public String editAdvert(Long advertId, String title, String description, Principal principal) {
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username);
+        Advert advert = advertRepository.getOne(advertId);
+
+        if (advert.getUserId().equals(user.getId())) {
+            advert.setTitle(title);
+            advert.setDescription(description);
+            advertRepository.save(advert);
         }
         return "redirect:/user-adverts";
     }

@@ -34,8 +34,8 @@
                         <th class="col-1">ID</th>
                         <th class="col-2">TYTUŁ</th>
                         <th class="col-5">OPIS</th>
-                        <th class="col-2 center">DODANO</th>
-                        <th class="col-2 center">AKCJE</th>
+                        <th class="col-2">DODANO</th>
+                        <th class="col-2">AKCJE</th>
                     </tr>
                     </thead>
                     <tbody class="text-color-lighter">
@@ -49,6 +49,12 @@
                                 <form class="form-inline mt-3" method="post" action="/delete-advert">
                                     <input type="hidden" name="advertId" value="${advert.id}">
                                     <button class="btn btn-outline-primary" type="submit">Usuń</button>
+                                    <sec:csrfInput/>
+                                </form>
+
+                                <form class="form-inline mt-3" method="get" action="/edit-advert">
+                                    <input type="hidden" name="advertId" value="${advert.id}">
+                                    <button class="btn btn-outline-primary" type="submit">Edytuj</button>
                                     <sec:csrfInput/>
                                 </form>
                             </td>
