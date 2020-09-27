@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
@@ -32,6 +33,7 @@ public class UserAdvertsController {
     public String getUserAdverts(Principal principal, Model model) {
         String username = principal.getName();
         User user = userRepository.findByUsername(username);
+        log.info("User: {}", user);
         List<Advert> userAdverts = advertRepository.findAllByUserOrderByPostedDesc(user);
         model.addAttribute("userAdverts", userAdverts);
         model.addAttribute("userAvertsUsername", username);
@@ -50,5 +52,19 @@ public class UserAdvertsController {
         } else {
             return "redirect:/"; // TODO redirect to 404
         }
+    }
+
+    @PostMapping("/delete-advert")
+    public String deleteAdvert(Long advertId, Principal principal) {
+        Optional<Advert> optionalAdvert = advertRepository.findById(advertId);
+        if (optionalAdvert.isPresent()) {
+            Advert advert = optionalAdvert.get();
+            String username = principal.getName();
+            User user = userRepository.findByUsername(username);
+            if (user.getId().equals(advert.getUserId())) {
+                advertRepository.deleteById(advertId);
+            }
+        }
+        return "redirect:/user-adverts";
     }
 }

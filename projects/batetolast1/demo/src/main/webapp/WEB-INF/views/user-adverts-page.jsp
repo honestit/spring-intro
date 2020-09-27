@@ -46,7 +46,11 @@
                             <td class="col-5">${advert.description}</td>
                             <td class="col-2">${advert.posted}</td>
                             <td class="col-2">
-                                    <%-- akcje do dodania --%>
+                                <form class="form-inline mt-3" method="post" action="/delete-advert">
+                                    <input type="hidden" name="advertId" value="${advert.id}">
+                                    <button class="btn btn-outline-primary" type="submit">Usuń</button>
+                                    <sec:csrfInput/>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>
