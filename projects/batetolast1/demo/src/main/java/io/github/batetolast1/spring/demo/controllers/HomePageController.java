@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -28,8 +29,8 @@ public class HomePageController {
     // Każdy klucz, który umieścimy w modelu, będzie dostępny wewnątrz Expression Language (EL) tak, jak zmienna w kodzie.
 
     @GetMapping
-    public String prepareHomePage(Model model) {
-        List<Advert> adverts = advertRepository.findAllByOrderByPostedDesc();
+    public String prepareHomePage(Principal principal, Model model) {
+        List<Advert> adverts = (principal != null) ? advertRepository.findAllByOrderByPostedDesc() : advertRepository.findFirst10ByOrderByPostedDesc();
         model.addAttribute("adverts", adverts);
         return "/WEB-INF/views/home-page.jsp";
     }

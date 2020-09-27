@@ -10,5 +10,7 @@ public interface AdvertRepository extends JpaRepository<Advert, Long> {
 
     List<Advert> findAllByOrderByPostedDesc();
 
+    List<Advert> findFirst10ByOrderByPostedDesc();
+
     List<Advert> findAllByUserOrderByPostedDesc(User user);
 }

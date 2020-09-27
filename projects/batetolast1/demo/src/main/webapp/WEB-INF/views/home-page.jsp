@@ -76,7 +76,12 @@
                             <td class="col-2">${advert.title}</td>
                             <td class="col-5">${advert.description}</td>
                             <td class="col-2">
-                                <a href="/user-adverts/${advert.user.id}">${advert.user.username}</a>
+                                <sec:authorize access="isAuthenticated()">
+                                    <a href="/user-adverts/${advert.user.id}">${advert.user.username}</a>
+                                </sec:authorize>
+                                <sec:authorize access="!isAuthenticated()">
+                                    ${advert.user.username}
+                                </sec:authorize>
                             </td>
                             <td class="col-2">${advert.posted}</td>
                         </tr>
