@@ -29,9 +29,9 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <form method="post" action="/edit-advert">
+                <form method="post" action="${pageContext.request.contextPath}/edit-advert">
                     <div class="form-group">
-                        <input type="hidden" name="advertId" value="${editedAdvert.id}">
+                        <input type="hidden" name="advertId" value="<c:out value="${editedAdvert.id}"/>">
                         <label for="title">Tytuł</label>
                         <input type="text" required name="title" id="title" class="form-control"
                                value="${editedAdvert.title}"/>
@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <label for="description">Opis</label>
                         <textarea required name="description" id="description"
-                                  class="form-control">${editedAdvert.description}</textarea>
+                                  class="form-control"><c:out value="${editedAdvert.description}"/></textarea>
                     </div>
                     <button class="btn btn-primary" type="submit">Zapisz</button>
                     <button class="btn btn-secondary" type="reset">Wyczyść dane</button>

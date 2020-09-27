@@ -42,15 +42,17 @@
                     <tbody class="text-color-lighter">
                     <c:forEach var="advert" items="${observedAdverts}" varStatus="counter">
                         <tr class="d-flex">
-                            <td class="col-1">${counter.index + 1}</td>
-                            <td class="col-2">${advert.title}</td>
-                            <td class="col-5">${advert.description}</td>
+                            <td class="col-1"><c:out value="${counter.index + 1}"/></td>
+                            <td class="col-2"><c:out value="${advert.title}"/></td>
+                            <td class="col-5"><c:out value="${advert.description}"/></td>
                             <td class="col-2">
-                                <a href="/user-adverts/${advert.user.id}">${advert.user.username}</a>
+                                <a href="/user-adverts/<c:out value="${advert.user.id}"/>"><c:out
+                                        value="${advert.user.username}"/></a>
                             </td>
-                            <td class="col-2">${advert.posted}</td>
+                            <td class="col-2"><c:out value="${advert.posted}"/></td>
                             <td class="col-2">
-                                <form class="form-inline mt-3" method="post" action="/unobserve-advert">
+                                <form class="form-inline mt-3" method="post"
+                                      action="${pageContext.request.contextPath}/unobserve-advert">
                                     <input type="hidden" name="advertId" value="${advert.id}">
                                     <button class="btn btn-outline-primary" type="submit">Przestań obserwować</button>
                                     <sec:csrfInput/>

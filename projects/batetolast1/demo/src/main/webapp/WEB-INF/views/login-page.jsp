@@ -25,6 +25,7 @@
             <div class="col-10"><h2>Logowanie</h2></div>
             <div class="col-1"></div>
         </div>
+
         <div class="row">
             <div class="col-1"></div>
             <div class="col-6">
@@ -36,7 +37,8 @@
                         </button>
                     </div>
                 </c:if>
-                <form method="post" action="/login">
+
+                <form method="post" action="${pageContext.request.contextPath}/login">
                     <div class="form-group">
                         <label for="username">Nazwa użytkownika</label>
                         <input type="text" required name="username" id="username" class="form-control"

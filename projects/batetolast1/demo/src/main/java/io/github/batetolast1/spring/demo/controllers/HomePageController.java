@@ -4,6 +4,7 @@ import io.github.batetolast1.spring.demo.model.domain.Advert;
 import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
 import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
+@Log4j2
 public class HomePageController {
 
     private final UserRepository userRepository;
@@ -26,18 +28,16 @@ public class HomePageController {
         this.advertRepository = advertRepository;
     }
 
-    // Klasa Model reprezentuje idee modelu we wzorcu MVC, ale na poziomie relacji Widok <-> Kontroler.
-    // Klasę tą należy rozumieć jako mapę, do której możemy wstawić dowolną wartość w kontrolerze i używać tej wartości w widoku.
-    // Obiekt Model zastępuje nam tym samym mapę atrybutów żądania.
-    // Kluczem w mapie jest obiekt typu String, a wartością obiekt dowolnego typu (mapa w postaci Map<String, Object>).
-    // Każdy klucz, który umieścimy w modelu, będzie dostępny wewnątrz Expression Language (EL) tak, jak zmienna w kodzie.
-
     @GetMapping
     public String prepareHomePage(Principal principal, Model model) {
         User loggedUser = (principal != null) ? userRepository.findByUsername(principal.getName()) : null;
         model.addAttribute("loggedUser", loggedUser);
+        log.info("Logged user={}", loggedUser);
+
         List<Advert> adverts = (principal != null) ? advertRepository.findAllByOrderByPostedDesc() : advertRepository.findFirst10ByOrderByPostedDesc();
         model.addAttribute("adverts", adverts);
+        log.info("All adverts={}", adverts);
+
         return "/WEB-INF/views/home-page.jsp";
     }
 }

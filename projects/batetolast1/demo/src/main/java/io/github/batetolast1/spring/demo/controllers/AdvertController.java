@@ -26,11 +26,10 @@ public class AdvertController {
     }
 
     @PostMapping("/add-advert")
-    public String addAdvert(String title,
-                            String description,
-                            Principal principal) { // obiekt klasy Principal reprezentuje ogólną informację o zalogowanym użytkowniku
-        String username = principal.getName(); // zwraca nazwę zalogowanego użytkownika (pole username w klasie User)
+    public String addAdvert(String title, String description, Principal principal) {
+        String username = principal.getName();
         User user = userRepository.findByUsername(username);
+
         Advert advert = Advert.builder()
                 .title(title)
                 .description(description)
@@ -40,9 +39,8 @@ public class AdvertController {
         log.info("Advert to add: {}", advert);
 
         advertRepository.save(advert);
-        log.info("Added advert: {}", advert);
+        log.info("Advert added to database: {}", advert);
 
-        return "redirect:/"; // po wykonaniu logiki zwrócona zostanie informacja o przekierowaniu (przeglądarka zrobi to automatycznie)
-        // obsługę oddajemy kontrolerowi HomePageController, która przygotuje model
+        return "redirect:/";
     }
 }

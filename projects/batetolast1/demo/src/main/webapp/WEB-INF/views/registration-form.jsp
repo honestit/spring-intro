@@ -24,10 +24,11 @@
             <div class="col-10"><h2>Rejestracja</h2></div>
             <div class="col-1"></div>
         </div>
+
         <div class="row">
             <div class="col-1"></div>
             <div class="col-6">
-                <form method="post" action="/register">
+                <form method="post" action="${pageContext.request.contextPath}/register">
                     <div class="form-group">
                         <label for="username">Nazwa użytkownika</label>
                         <input type="text" required name="username" id="username" class="form-control"
@@ -50,7 +51,7 @@
                     </div>
                     <button class="btn btn-primary" type="submit">Zarejestruj</button>
                     <button class="btn btn-secondary" type="reset">Wyczyść dane</button>
-                    <sec:csrfInput/> <%-- tag chroniący przed atakami typu CSRF --%>
+                    <sec:csrfInput/>
                 </form>
             </div>
             <div class="col-5"></div>

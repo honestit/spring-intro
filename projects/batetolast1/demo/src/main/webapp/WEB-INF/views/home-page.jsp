@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8">
-                    <form method="post" action="/add-advert">
+                    <form method="post" action="${pageContext.request.contextPath}/add-advert">
                         <div class="form-group">
                             <label for="title">Tytuł</label>
                             <input type="text" required name="title" id="title" class="form-control"
@@ -44,7 +44,7 @@
                         </div>
                         <button class="btn btn-primary" type="submit">Zarejestruj</button>
                         <button class="btn btn-secondary" type="reset">Wyczyść dane</button>
-                        <sec:csrfInput/> <%-- tag chroniący przed atakami typu CSRF --%>
+                        <sec:csrfInput/>
                     </form>
                 </div>
                 <div class="col-2"></div>
@@ -68,7 +68,6 @@
                         <th class="col-2">UŻYTKOWNIK</th>
                         <th class="col-2">DODANO</th>
                         <sec:authorize access="isAuthenticated()">
-
                             <th class="col-2">AKCJE</th>
                         </sec:authorize>
                     </tr>
@@ -77,22 +76,25 @@
                     <c:forEach var="advert" items="${adverts}" varStatus="counter">
                         <tr class="d-flex">
                             <td class="col-1">${counter.index + 1}</td>
-                            <td class="col-2">${advert.title}</td>
-                            <td class="col-5">${advert.description}</td>
+                            <td class="col-2"><c:out value="${advert.title}"/></td>
+                            <td class="col-5"><c:out value="${advert.description}"/></td>
                             <td class="col-2">
                                 <sec:authorize access="isAuthenticated()">
-                                    <a href="/user-adverts/${advert.user.id}">${advert.user.username}</a>
+                                    <a href="/user-adverts/<c:out value="${advert.user.id}"/>"><c:out
+                                            value="${advert.user.username}"/></a>
                                 </sec:authorize>
                                 <sec:authorize access="!isAuthenticated()">
-                                    ${advert.user.username}
+                                    <c:out value="${advert.user.username}"/>
                                 </sec:authorize>
                             </td>
-                            <td class="col-2">${advert.posted}</td>
-                            <sec:authorize access="isAuthenticated()">
-                                <td class="col-2">
+                            <td class="col-2"><c:out value="${advert.posted}"/></td>
+
+                            <td class="col-2">
+                                <sec:authorize access="isAuthenticated()">
                                     <c:if test="${!loggedUser.equals(advert.user)}">
                                         <c:if test="${loggedUser.observedAdverts.contains(advert)}">
-                                            <form class="form-inline mt-3" method="post" action="/unobserve-advert">
+                                            <form class="form-inline mt-3" method="post"
+                                                  action="${pageContext.request.contextPath}/unobserve-advert">
                                                 <input type="hidden" name="advertId" value="${advert.id}">
                                                 <button class="btn btn-outline-primary" type="submit">Przestań
                                                     obserwować
@@ -101,7 +103,8 @@
                                             </form>
                                         </c:if>
                                         <c:if test="${!loggedUser.observedAdverts.contains(advert)}">
-                                            <form class="form-inline mt-3" method="post" action="/observe-advert">
+                                            <form class="form-inline mt-3" method="post"
+                                                  action="${pageContext.request.contextPath}/observe-advert">
                                                 <input type="hidden" name="advertId" value="${advert.id}">
                                                 <button class="btn btn-outline-primary" type="submit">Obserwuj
                                                     ogłoszenie
@@ -110,15 +113,14 @@
                                             </form>
                                         </c:if>
                                     </c:if>
-                                </td>
-                            </sec:authorize>
+                                </sec:authorize>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
 
     <!-- Optional JavaScript -->
