@@ -46,19 +46,21 @@
                             <td class="col-5"><c:out value="${advert.description}"/></td>
                             <td class="col-2"><c:out value="${advert.posted}"/></td>
                             <td class="col-2">
-                                <form class="form-inline mt-3" method="post"
-                                      action="${pageContext.request.contextPath}/delete-advert">
-                                    <input type="hidden" name="advertId" value="${advert.id}">
-                                    <button class="btn btn-outline-primary" type="submit">Usuń</button>
-                                    <sec:csrfInput/>
-                                </form>
+                                <c:if test="${loggedUser == advertsOwner}">
+                                    <form class="form-inline mt-3" method="post"
+                                          action="${pageContext.request.contextPath}/delete-advert">
+                                        <input type="hidden" name="advertId" value="${advert.id}">
+                                        <button class="btn btn-outline-primary" type="submit">Usuń</button>
+                                        <sec:csrfInput/>
+                                    </form>
 
-                                <form class="form-inline mt-3" method="get"
-                                      action="${pageContext.request.contextPath}/edit-advert">
-                                    <input type="hidden" name="advertId" value="${advert.id}">
-                                    <button class="btn btn-outline-primary" type="submit">Edytuj</button>
-                                    <sec:csrfInput/>
-                                </form>
+                                    <form class="form-inline mt-3" method="get"
+                                          action="${pageContext.request.contextPath}/edit-advert">
+                                        <input type="hidden" name="advertId" value="${advert.id}">
+                                        <button class="btn btn-outline-primary" type="submit">Edytuj</button>
+                                        <sec:csrfInput/>
+                                    </form>
+                                </c:if>
 
                                 <c:if test="${loggedUser != advertsOwner}">
                                     <c:if test="${loggedUser.observedAdverts.contains(advert)}">
