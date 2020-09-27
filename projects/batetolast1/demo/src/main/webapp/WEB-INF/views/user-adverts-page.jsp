@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="col-1"></div>
-            <div class="col-6"><h2>Lista ogłoszeń użytkownika ${userAvertsUsername}</h2></div>
+            <div class="col-6"><h2>Lista ogłoszeń użytkownika ${advertsOwner.username}</h2></div>
             <div class="col-5"></div>
         </div>
 
@@ -39,7 +39,7 @@
                     </tr>
                     </thead>
                     <tbody class="text-color-lighter">
-                    <c:forEach var="advert" items="${userAdverts}" varStatus="counter">
+                    <c:forEach var="advert" items="${ownersAdverts}" varStatus="counter">
                         <tr class="d-flex">
                             <td class="col-1">${counter.index + 1}</td>
                             <td class="col-2">${advert.title}</td>
@@ -57,6 +57,27 @@
                                     <button class="btn btn-outline-primary" type="submit">Edytuj</button>
                                     <sec:csrfInput/>
                                 </form>
+
+                                <c:if test="${loggedUser != advertsOwner}">
+                                    <c:if test="${loggedUser.observedAdverts.contains(advert)}">
+                                        <form class="form-inline mt-3" method="post" action="/unobserve-advert">
+                                            <input type="hidden" name="advertId" value="${advert.id}">
+                                            <button class="btn btn-outline-primary" type="submit">Przestań
+                                                obserwować
+                                            </button>
+                                            <sec:csrfInput/>
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${!loggedUser.observedAdverts.contains(advert)}">
+                                        <form class="form-inline mt-3" method="post" action="/observe-advert">
+                                            <input type="hidden" name="advertId" value="${advert.id}">
+                                            <button class="btn btn-outline-primary" type="submit">Obserwuj
+                                                ogłoszenie
+                                            </button>
+                                            <sec:csrfInput/>
+                                        </form>
+                                    </c:if>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>

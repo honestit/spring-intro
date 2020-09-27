@@ -1,7 +1,9 @@
 package io.github.batetolast1.spring.demo.controllers;
 
 import io.github.batetolast1.spring.demo.model.domain.Advert;
+import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
+import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,12 @@ import java.util.List;
 @RequestMapping("/")
 public class HomePageController {
 
+    private final UserRepository userRepository;
     private final AdvertRepository advertRepository;
 
     @Autowired
-    public HomePageController(AdvertRepository advertRepository) {
+    public HomePageController(UserRepository userRepository, AdvertRepository advertRepository) {
+        this.userRepository = userRepository;
         this.advertRepository = advertRepository;
     }
 
@@ -30,6 +34,8 @@ public class HomePageController {
 
     @GetMapping
     public String prepareHomePage(Principal principal, Model model) {
+        User loggedUser = (principal != null) ? userRepository.findByUsername(principal.getName()) : null;
+        model.addAttribute("loggedUser", loggedUser);
         List<Advert> adverts = (principal != null) ? advertRepository.findAllByOrderByPostedDesc() : advertRepository.findFirst10ByOrderByPostedDesc();
         model.addAttribute("adverts", adverts);
         return "/WEB-INF/views/home-page.jsp";

@@ -32,22 +32,29 @@ public class UserAdvertsController {
     @GetMapping("/user-adverts")
     public String getUserAdverts(Principal principal, Model model) {
         String username = principal.getName();
-        User user = userRepository.findByUsername(username);
-        log.info("User: {}", user);
-        List<Advert> userAdverts = advertRepository.findAllByUserOrderByPostedDesc(user);
-        model.addAttribute("userAdverts", userAdverts);
-        model.addAttribute("userAvertsUsername", username);
+        User advertsOwner = userRepository.findByUsername(username);
+        model.addAttribute("advertsOwner", advertsOwner);
+        log.info("Adverts owner: {}", advertsOwner);
+
+        List<Advert> ownersAdverts = advertRepository.findAllByUserOrderByPostedDesc(advertsOwner);
+        model.addAttribute("ownersAdverts", ownersAdverts);
+
+        model.addAttribute("loggedUser", advertsOwner);
         return "/WEB-INF/views/user-adverts-page.jsp";
     }
 
     @GetMapping("/user-adverts/{id:\\d+}")
-    public String getUserAdverts(@PathVariable Long id, Model model) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            List<Advert> userAdverts = advertRepository.findAllByUserOrderByPostedDesc(user);
-            model.addAttribute("userAdverts", userAdverts);
-            model.addAttribute("userAvertsUsername", user.getUsername());
+    public String getUserAdverts(@PathVariable Long id, Principal principal, Model model) {
+        Optional<User> optionalOwner = userRepository.findById(id);
+        if (optionalOwner.isPresent()) {
+            User advertsOwner = optionalOwner.get();
+            model.addAttribute("advertsOwner", advertsOwner);
+
+            List<Advert> ownersAdverts = advertRepository.findAllByUserOrderByPostedDesc(advertsOwner);
+            model.addAttribute("ownersAdverts", ownersAdverts);
+
+            User loggedUser = userRepository.findByUsername(principal.getName());
+            model.addAttribute("loggedUser", loggedUser);
             return "/WEB-INF/views/user-adverts-page.jsp";
         } else {
             return "redirect:/"; // TODO redirect to 404
@@ -101,5 +108,29 @@ public class UserAdvertsController {
         User user = userRepository.findByUsername(username);
         model.addAttribute("observedAdverts", user.getObservedAdverts());
         return "/WEB-INF/views/observed-adverts-page.jsp";
+    }
+
+    @PostMapping("/observe-advert")
+    public String observeAdvert(Principal principal, Long advertId) {
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username);
+        Advert advert = advertRepository.getOne(advertId);
+        if (advert.getUser() != user) {
+            user.getObservedAdverts().add(advert);
+            userRepository.save(user);
+        }
+        log.info("Observed adverts={}", user.getObservedAdverts());
+        return "redirect:/observed-adverts";
+    }
+
+    @PostMapping("/unobserve-advert")
+    public String unobserveAdvert(Principal principal, Long advertId) {
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username);
+        Advert advert = advertRepository.getOne(advertId);
+        user.getObservedAdverts().remove(advert);
+        userRepository.save(user);
+        log.info("Observed adverts={}", user.getObservedAdverts());
+        return "redirect:/observed-adverts";
     }
 }

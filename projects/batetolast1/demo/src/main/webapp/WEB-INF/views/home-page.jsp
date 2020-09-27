@@ -66,7 +66,11 @@
                         <th class="col-2">TYTUŁ</th>
                         <th class="col-5">OPIS</th>
                         <th class="col-2">UŻYTKOWNIK</th>
-                        <th class="col-2 center">DODANO</th>
+                        <th class="col-2">DODANO</th>
+                        <sec:authorize access="isAuthenticated()">
+
+                            <th class="col-2">AKCJE</th>
+                        </sec:authorize>
                     </tr>
                     </thead>
                     <tbody class="text-color-lighter">
@@ -84,6 +88,30 @@
                                 </sec:authorize>
                             </td>
                             <td class="col-2">${advert.posted}</td>
+                            <sec:authorize access="isAuthenticated()">
+                                <td class="col-2">
+                                    <c:if test="${!loggedUser.equals(advert.user)}">
+                                        <c:if test="${loggedUser.observedAdverts.contains(advert)}">
+                                            <form class="form-inline mt-3" method="post" action="/unobserve-advert">
+                                                <input type="hidden" name="advertId" value="${advert.id}">
+                                                <button class="btn btn-outline-primary" type="submit">Przestań
+                                                    obserwować
+                                                </button>
+                                                <sec:csrfInput/>
+                                            </form>
+                                        </c:if>
+                                        <c:if test="${!loggedUser.observedAdverts.contains(advert)}">
+                                            <form class="form-inline mt-3" method="post" action="/observe-advert">
+                                                <input type="hidden" name="advertId" value="${advert.id}">
+                                                <button class="btn btn-outline-primary" type="submit">Obserwuj
+                                                    ogłoszenie
+                                                </button>
+                                                <sec:csrfInput/>
+                                            </form>
+                                        </c:if>
+                                    </c:if>
+                                </td>
+                            </sec:authorize>
                         </tr>
                     </c:forEach>
                     </tbody>
