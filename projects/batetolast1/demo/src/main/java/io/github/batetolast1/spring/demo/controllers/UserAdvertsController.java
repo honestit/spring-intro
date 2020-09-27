@@ -61,7 +61,7 @@ public class UserAdvertsController {
             Advert advert = optionalAdvert.get();
             String username = principal.getName();
             User user = userRepository.findByUsername(username);
-            if (user.getId().equals(advert.getUserId())) {
+            if (user.getId().equals(advert.getUser().getId())) {
                 advertRepository.delete(advert);
             }
         }
@@ -74,7 +74,7 @@ public class UserAdvertsController {
         User user = userRepository.findByUsername(username);
         Advert advert = advertRepository.getOne(advertId);
 
-        if (advert.getUserId().equals(user.getId())) {
+        if (advert.getUser().getId().equals(user.getId())) {
             model.addAttribute("editedAdvert", advert);
             return "/WEB-INF/views/edit-advert-form.jsp";
         }
@@ -87,11 +87,19 @@ public class UserAdvertsController {
         User user = userRepository.findByUsername(username);
         Advert advert = advertRepository.getOne(advertId);
 
-        if (advert.getUserId().equals(user.getId())) {
+        if (advert.getUser().getId().equals(user.getId())) {
             advert.setTitle(title);
             advert.setDescription(description);
             advertRepository.save(advert);
         }
         return "redirect:/user-adverts";
+    }
+
+    @GetMapping("/observed-adverts")
+    public String getObservedAdverts(Principal principal, Model model) {
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username);
+        model.addAttribute("observedAdverts", user.getObservedAdverts());
+        return "/WEB-INF/views/observed-adverts-page.jsp";
     }
 }

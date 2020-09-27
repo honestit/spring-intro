@@ -1,9 +1,9 @@
 package io.github.batetolast1.spring.demo.model.domain;
 
-import com.sun.xml.bind.v2.TODO;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 // Spring
 @Entity // tworzy z klasy tzw. encję
@@ -32,7 +32,8 @@ public class User {
     private String password;
 
     // imię i nazwisko użytkownika
-    @Column(name = "first_name", nullable = false) // podajemy nazwę kolumny zgodnie z konwencją SQL, pole nie może być puste
+    @Column(name = "first_name", nullable = false)
+    // podajemy nazwę kolumny zgodnie z konwencją SQL, pole nie może być puste
     private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
@@ -40,6 +41,9 @@ public class User {
     // czy użytkownik jest aktywny
     @Column(nullable = false) // pole nie może być puste
     private boolean active;
+
+    @ManyToMany
+    private Set<Advert> observedAdverts;
 
     //TODO add @OneToMany with mappedBy to future List<Advert>, add (fetch = FetchType.LAZY) (https://www.baeldung.com/jpa-join-column)?
 }

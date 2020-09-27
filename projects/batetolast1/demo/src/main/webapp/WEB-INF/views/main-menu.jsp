@@ -15,6 +15,10 @@
                     <a class="nav-link btn btn-outline-info" role="button" href="/user-adverts">
                         <span class="text-lg-left">Twoje ogłoszenia</span></a>
                 </li>
+                <li class="nav-item active mx-1">
+                    <a class="nav-link btn btn-outline-info" role="button" href="/observed-adverts">
+                        <span class="text-lg-left">Obserwowane ogłoszenia</span></a>
+                </li>
             </sec:authorize>
         </ul>
     </div>

@@ -28,8 +28,6 @@ public class Advert {
     @Column
     private LocalDateTime posted;
     @ManyToOne // wiele ogłoszeń może należeć do jednego użytkownika // TODO add (fetch = FetchType.LAZY) ?
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Long userId;
 }
