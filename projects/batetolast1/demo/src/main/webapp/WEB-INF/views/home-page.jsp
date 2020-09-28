@@ -32,6 +32,8 @@
                 <div class="col-2"></div>
                 <div class="col-8">
                     <form method="post" action="${pageContext.request.contextPath}/add-advert">
+                        <input type="hidden" name="username"
+                               value="${pageContext.request.userPrincipal.principal.username}">
                         <div class="form-group">
                             <label for="title">Tytuł</label>
                             <input type="text" required name="title" id="title" class="form-control"

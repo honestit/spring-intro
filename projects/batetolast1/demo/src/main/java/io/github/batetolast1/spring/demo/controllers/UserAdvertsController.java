@@ -1,5 +1,6 @@
 package io.github.batetolast1.spring.demo.controllers;
 
+import io.github.batetolast1.spring.demo.dto.EditAdvertDTO;
 import io.github.batetolast1.spring.demo.model.domain.Advert;
 import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
@@ -101,17 +102,16 @@ public class UserAdvertsController {
     }
 
     @PostMapping("/edit-advert")
-    public String editAdvert(Long advertId, String title, String description, Principal principal) {
-        String username = principal.getName();
-        User loggedUser = userRepository.findByUsername(username);
+    public String editAdvert(EditAdvertDTO editAdvertDTO) {
+        User loggedUser = userRepository.findByUsername(editAdvertDTO.getUsername());
         log.info("Logged user={}", loggedUser);
 
-        Advert advert = advertRepository.getOne(advertId);
+        Advert advert = advertRepository.getOne(editAdvertDTO.getAdvertId());
         log.info("Advert to edit={}", advert);
 
         if (loggedUser == advert.getUser()) {
-            advert.setTitle(title);
-            advert.setDescription(description);
+            advert.setTitle(editAdvertDTO.getTitle());
+            advert.setDescription(editAdvertDTO.getDescription());
             log.info("Advert to update={}", advert);
 
             advertRepository.save(advert);

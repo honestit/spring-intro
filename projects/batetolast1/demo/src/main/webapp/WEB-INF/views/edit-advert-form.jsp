@@ -31,6 +31,8 @@
             <div class="col-8">
                 <form method="post" action="${pageContext.request.contextPath}/edit-advert">
                     <div class="form-group">
+                        <input type="hidden" name="username"
+                               value="${pageContext.request.userPrincipal.principal.username}">
                         <input type="hidden" name="advertId" value="<c:out value="${editedAdvert.id}"/>">
                         <label for="title">Tytuł</label>
                         <input type="text" required name="title" id="title" class="form-control"

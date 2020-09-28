@@ -1,5 +1,6 @@
 package io.github.batetolast1.spring.demo.controllers;
 
+import io.github.batetolast1.spring.demo.dto.CreateAdvertDTO;
 import io.github.batetolast1.spring.demo.model.domain.Advert;
 import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
@@ -26,15 +27,13 @@ public class AdvertController {
     }
 
     @PostMapping("/add-advert")
-    public String addAdvert(String title, String description, Principal principal) {
-        String username = principal.getName();
-        User user = userRepository.findByUsername(username);
+    public String addAdvert(CreateAdvertDTO createAdvertDTO) {
 
         Advert advert = Advert.builder()
-                .title(title)
-                .description(description)
+                .title(createAdvertDTO.getTitle())
+                .description(createAdvertDTO.getDescription())
                 .posted(LocalDateTime.now())
-                .user(user)
+                .user(userRepository.findByUsername(createAdvertDTO.getUsername()))
                 .build();
         log.info("Advert to add: {}", advert);
 
