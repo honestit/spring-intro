@@ -1,6 +1,9 @@
 package io.github.batetolast1.spring.demo.controllers;
 
+import io.github.batetolast1.spring.demo.dto.DeleteAdvertDTO;
 import io.github.batetolast1.spring.demo.dto.EditAdvertDTO;
+import io.github.batetolast1.spring.demo.dto.ObserveAdvertDTO;
+import io.github.batetolast1.spring.demo.dto.UnobserveAdvertDTO;
 import io.github.batetolast1.spring.demo.model.domain.Advert;
 import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
@@ -60,15 +63,14 @@ public class UserAdvertsController {
     }
 
     @PostMapping("/delete-advert")
-    public String deleteAdvert(Long advertId, Principal principal) {
-        Optional<Advert> optionalAdvert = advertRepository.findById(advertId);
+    public String deleteAdvert(DeleteAdvertDTO deleteAdvertDTO) {
+        Optional<Advert> optionalAdvert = advertRepository.findById(deleteAdvertDTO.getAdvertId());
 
         if (optionalAdvert.isPresent()) {
             Advert advert = optionalAdvert.get();
             log.info("Advert to delete={}", advert);
 
-            String username = principal.getName();
-            User loggedUser = userRepository.findByUsername(username);
+            User loggedUser = userRepository.findByUsername(deleteAdvertDTO.getUsername());
             log.info("Logged user={}", loggedUser);
 
             if (loggedUser == advert.getUser()) {
@@ -78,7 +80,7 @@ public class UserAdvertsController {
                 log.info("Advert wasn't created by logged user, deleting failed!");
             }
         } else {
-            log.info("Advert not found, id={}", advertId);
+            log.info("Advert not found, id={}", deleteAdvertDTO.getAdvertId());
         }
         return "redirect:/user-adverts";
     }
@@ -135,12 +137,11 @@ public class UserAdvertsController {
     }
 
     @PostMapping("/observe-advert")
-    public String observeAdvert(Principal principal, Long advertId) {
-        String username = principal.getName();
-        User loggedUser = userRepository.findByUsername(username);
+    public String observeAdvert(ObserveAdvertDTO observeAdvertDTO) {
+        User loggedUser = userRepository.findByUsername(observeAdvertDTO.getUsername());
         log.info("Logged user={}", loggedUser);
 
-        Advert advert = advertRepository.getOne(advertId);
+        Advert advert = advertRepository.getOne(observeAdvertDTO.getAdvertId());
         log.info("Advert to observe={}", advert);
 
         if (advert.getUser() != loggedUser) {
@@ -154,12 +155,11 @@ public class UserAdvertsController {
     }
 
     @PostMapping("/unobserve-advert")
-    public String unobserveAdvert(Principal principal, Long advertId) {
-        String username = principal.getName();
-        User loggedUser = userRepository.findByUsername(username);
+    public String unobserveAdvert(UnobserveAdvertDTO unobserveAdvertDTO) {
+        User loggedUser = userRepository.findByUsername(unobserveAdvertDTO.getUsername());
         log.info("Logged user={}", loggedUser);
 
-        Advert advert = advertRepository.getOne(advertId);
+        Advert advert = advertRepository.getOne(unobserveAdvertDTO.getAdvertId());
         log.info("Advert to unobserve={}", advert);
 
         if (loggedUser.getObservedAdverts().remove(advert)) {

@@ -54,6 +54,8 @@
                                 <form class="form-inline mt-3" method="post"
                                       action="${pageContext.request.contextPath}/unobserve-advert">
                                     <input type="hidden" name="advertId" value="${advert.id}">
+                                    <input type="hidden" name="username"
+                                           value="${pageContext.request.userPrincipal.principal.username}">
                                     <button class="btn btn-outline-primary" type="submit">Przestań obserwować</button>
                                     <sec:csrfInput/>
                                 </form>

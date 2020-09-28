@@ -82,6 +82,8 @@
                             <td class="col-5"><c:out value="${advert.description}"/></td>
                             <td class="col-2">
                                 <sec:authorize access="isAuthenticated()">
+
+
                                     <a href="/user-adverts/<c:out value="${advert.user.id}"/>"><c:out
                                             value="${advert.user.username}"/></a>
                                 </sec:authorize>
@@ -98,6 +100,8 @@
                                             <form class="form-inline mt-3" method="post"
                                                   action="${pageContext.request.contextPath}/unobserve-advert">
                                                 <input type="hidden" name="advertId" value="${advert.id}">
+                                                <input type="hidden" name="username"
+                                                       value="${pageContext.request.userPrincipal.principal.username}">
                                                 <button class="btn btn-outline-primary" type="submit">Przestań
                                                     obserwować
                                                 </button>
@@ -108,6 +112,8 @@
                                             <form class="form-inline mt-3" method="post"
                                                   action="${pageContext.request.contextPath}/observe-advert">
                                                 <input type="hidden" name="advertId" value="${advert.id}">
+                                                <input type="hidden" name="username"
+                                                       value="${pageContext.request.userPrincipal.principal.username}">
                                                 <button class="btn btn-outline-primary" type="submit">Obserwuj
                                                     ogłoszenie
                                                 </button>

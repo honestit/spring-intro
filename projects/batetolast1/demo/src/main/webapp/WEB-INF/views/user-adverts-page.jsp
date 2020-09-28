@@ -50,6 +50,8 @@
                                     <form class="form-inline mt-3" method="post"
                                           action="${pageContext.request.contextPath}/delete-advert">
                                         <input type="hidden" name="advertId" value="${advert.id}">
+                                        <input type="hidden" name="username"
+                                               value="${pageContext.request.userPrincipal.principal.username}">
                                         <button class="btn btn-outline-primary" type="submit">Usuń</button>
                                         <sec:csrfInput/>
                                     </form>
@@ -67,6 +69,8 @@
                                         <form class="form-inline mt-3" method="post"
                                               action="${pageContext.request.contextPath}/unobserve-advert">
                                             <input type="hidden" name="advertId" value="${advert.id}">
+                                            <input type="hidden" name="username"
+                                                   value="${pageContext.request.userPrincipal.principal.username}">
                                             <button class="btn btn-outline-primary" type="submit">Przestań
                                                 obserwować
                                             </button>
@@ -77,6 +81,8 @@
                                         <form class="form-inline mt-3" method="post"
                                               action="${pageContext.request.contextPath}/observe-advert">
                                             <input type="hidden" name="advertId" value="${advert.id}">
+                                            <input type="hidden" name="username"
+                                                   value="${pageContext.request.userPrincipal.principal.username}">
                                             <button class="btn btn-outline-primary" type="submit">Obserwuj
                                                 ogłoszenie
                                             </button>
