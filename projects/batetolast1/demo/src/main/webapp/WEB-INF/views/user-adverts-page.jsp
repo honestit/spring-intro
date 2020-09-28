@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="col-1"></div>
-            <div class="col-6"><h2>Lista ogłoszeń użytkownika ${advertsOwner.username}</h2></div>
+            <div class="col-6"><h2>Lista ogłoszeń użytkownika ${userDTO.username}</h2></div>
             <div class="col-5"></div>
         </div>
 
@@ -39,17 +39,17 @@
                     </tr>
                     </thead>
                     <tbody class="text-color-lighter">
-                    <c:forEach var="advert" items="${ownerAdverts}" varStatus="counter">
+                    <c:forEach var="advertDTO" items="${ownerAdvertDTOS}" varStatus="counter">
                         <tr class="d-flex">
                             <td class="col-1">${counter.index + 1}</td>
-                            <td class="col-2"><c:out value="${advert.title}"/></td>
-                            <td class="col-5"><c:out value="${advert.description}"/></td>
-                            <td class="col-2"><c:out value="${advert.posted}"/></td>
+                            <td class="col-2"><c:out value="${advertDTO.title}"/></td>
+                            <td class="col-5"><c:out value="${advertDTO.description}"/></td>
+                            <td class="col-2"><c:out value="${advertDTO.posted}"/></td>
                             <td class="col-2">
-                                <c:if test="${loggedUser == advertsOwner}">
+                                <c:if test="${advertDTO.createdByLoggedUser}">
                                     <form class="form-inline mt-3" method="post"
                                           action="${pageContext.request.contextPath}/delete-advert">
-                                        <input type="hidden" name="advertId" value="${advert.id}">
+                                        <input type="hidden" name="advertId" value="${advertDTO.id}">
                                         <input type="hidden" name="username"
                                                value="${pageContext.request.userPrincipal.principal.username}">
                                         <button class="btn btn-outline-primary" type="submit">Usuń</button>
@@ -58,17 +58,17 @@
 
                                     <form class="form-inline mt-3" method="get"
                                           action="${pageContext.request.contextPath}/edit-advert">
-                                        <input type="hidden" name="advertId" value="${advert.id}">
+                                        <input type="hidden" name="advertId" value="${advertDTO.id}">
                                         <button class="btn btn-outline-primary" type="submit">Edytuj</button>
                                         <sec:csrfInput/>
                                     </form>
                                 </c:if>
 
-                                <c:if test="${loggedUser != advertsOwner}">
-                                    <c:if test="${loggedUser.observedAdverts.contains(advert)}">
+                                <c:if test="${!advertDTO.createdByLoggedUser}">
+                                    <c:if test="${advertDTO.observed}">
                                         <form class="form-inline mt-3" method="post"
                                               action="${pageContext.request.contextPath}/unobserve-advert">
-                                            <input type="hidden" name="advertId" value="${advert.id}">
+                                            <input type="hidden" name="advertId" value="${advertDTO.id}">
                                             <input type="hidden" name="username"
                                                    value="${pageContext.request.userPrincipal.principal.username}">
                                             <button class="btn btn-outline-primary" type="submit">Przestań
@@ -77,10 +77,10 @@
                                             <sec:csrfInput/>
                                         </form>
                                     </c:if>
-                                    <c:if test="${!loggedUser.observedAdverts.contains(advert)}">
+                                    <c:if test="${!advertDTO.observed}">
                                         <form class="form-inline mt-3" method="post"
                                               action="${pageContext.request.contextPath}/observe-advert">
-                                            <input type="hidden" name="advertId" value="${advert.id}">
+                                            <input type="hidden" name="advertId" value="${advertDTO.id}">
                                             <input type="hidden" name="username"
                                                    value="${pageContext.request.userPrincipal.principal.username}">
                                             <button class="btn btn-outline-primary" type="submit">Obserwuj

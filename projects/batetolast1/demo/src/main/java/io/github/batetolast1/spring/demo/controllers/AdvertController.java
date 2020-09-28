@@ -2,7 +2,6 @@ package io.github.batetolast1.spring.demo.controllers;
 
 import io.github.batetolast1.spring.demo.dto.CreateAdvertDTO;
 import io.github.batetolast1.spring.demo.model.domain.Advert;
-import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
 import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
 import lombok.extern.log4j.Log4j2;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.Principal;
 import java.time.LocalDateTime;
 
 @Controller

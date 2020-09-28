@@ -1,9 +1,6 @@
 package io.github.batetolast1.spring.demo.controllers;
 
-import io.github.batetolast1.spring.demo.dto.DeleteAdvertDTO;
-import io.github.batetolast1.spring.demo.dto.EditAdvertDTO;
-import io.github.batetolast1.spring.demo.dto.ObserveAdvertDTO;
-import io.github.batetolast1.spring.demo.dto.UnobserveAdvertDTO;
+import io.github.batetolast1.spring.demo.dto.*;
 import io.github.batetolast1.spring.demo.model.domain.Advert;
 import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
@@ -20,6 +17,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @Log4j2
@@ -38,7 +36,6 @@ public class UserAdvertsController {
     public String getUserAdverts(@PathVariable(required = false) Long id, Principal principal, Model model) {
         String username = principal.getName();
         User loggedUser = userRepository.findByUsername(username);
-        model.addAttribute("loggedUser", loggedUser);
         log.info("Logged user={}", loggedUser);
 
         User advertsOwner;
@@ -52,12 +49,28 @@ public class UserAdvertsController {
             }
             advertsOwner = optionalUser.get();
         }
-        model.addAttribute("advertsOwner", advertsOwner);
+
+        ShowUserDTO userDTO = new ShowUserDTO();
+        userDTO.setUsername(advertsOwner.getUsername());
+        model.addAttribute("userDTO", userDTO);
         log.info("Adverts' owner={}", advertsOwner);
 
-        List<Advert> ownerAdverts = advertRepository.findAllByUserOrderByPostedDesc(advertsOwner);
-        model.addAttribute("ownerAdverts", ownerAdverts);
-        log.info("Owner's adverts={}", ownerAdverts);
+        List<Advert> ownersAdverts = advertRepository.findAllByUserOrderByPostedDesc(advertsOwner);
+        log.info("Owner's adverts={}", ownersAdverts);
+
+        List<ShowAdvertDTO> ownerAdvertDTOS = ownersAdverts.stream().map(advert -> {
+            ShowAdvertDTO advertDTO = new ShowAdvertDTO();
+            advertDTO.setId(advert.getId());
+            advertDTO.setTitle(advert.getTitle());
+            advertDTO.setDescription(advert.getDescription());
+            advertDTO.setUserId(advert.getUser().getId());
+            advertDTO.setUsername(advert.getUser().getUsername());
+            advertDTO.setPosted(advert.getPosted());
+            advertDTO.setCreatedByLoggedUser(loggedUser != null && loggedUser == advert.getUser());
+            advertDTO.setObserved(loggedUser != null && loggedUser.getObservedAdverts().contains(advert));
+            return advertDTO;
+        }).collect(Collectors.toList());
+        model.addAttribute("ownerAdvertDTOS", ownerAdvertDTOS);
 
         return "user-adverts-page";
     }
