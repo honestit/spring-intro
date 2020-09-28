@@ -32,8 +32,5 @@ public class Advert {
     private LocalDateTime posted;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Long userId;
 }
