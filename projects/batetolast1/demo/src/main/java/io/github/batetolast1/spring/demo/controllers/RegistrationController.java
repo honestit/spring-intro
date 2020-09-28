@@ -26,7 +26,7 @@ public class RegistrationController {
 
     @GetMapping
     public String prepareRegistrationPage() {
-        return "/WEB-INF/views/registration-form.jsp";
+        return "registration-form";
     }
 
     @PostMapping // obsługuje żądanie typu POST

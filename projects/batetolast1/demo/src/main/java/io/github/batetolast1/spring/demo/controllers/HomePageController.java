@@ -38,6 +38,6 @@ public class HomePageController {
         model.addAttribute("adverts", adverts);
         log.info("All adverts={}", adverts);
 
-        return "/WEB-INF/views/home-page.jsp";
+        return "home-page";
     }
 }

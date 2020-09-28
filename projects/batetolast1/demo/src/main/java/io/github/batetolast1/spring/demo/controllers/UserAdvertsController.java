@@ -55,7 +55,7 @@ public class UserAdvertsController {
         model.addAttribute("ownerAdverts", ownerAdverts);
         log.info("Owner's adverts={}", ownerAdverts);
 
-        return "/WEB-INF/views/user-adverts-page.jsp";
+        return "user-adverts-page";
     }
 
     @PostMapping("/delete-advert")
@@ -97,7 +97,7 @@ public class UserAdvertsController {
         }
 
         model.addAttribute("editedAdvert", advert);
-        return "/WEB-INF/views/edit-advert-form.jsp";
+        return "edit-advert-form";
     }
 
     @PostMapping("/edit-advert")
@@ -131,7 +131,7 @@ public class UserAdvertsController {
         Set<Advert> observedAdverts = loggedUser.getObservedAdverts();
         model.addAttribute("observedAdverts", observedAdverts);
         log.info("Observed adverts={}", observedAdverts);
-        return "/WEB-INF/views/observed-adverts-page.jsp";
+        return "observed-adverts-page";
     }
 
     @PostMapping("/observe-advert")
