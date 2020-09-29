@@ -11,5 +11,4 @@ public class CreateAdvertDTO {
 
     private String title;
     private String description;
-    private String username;
 }

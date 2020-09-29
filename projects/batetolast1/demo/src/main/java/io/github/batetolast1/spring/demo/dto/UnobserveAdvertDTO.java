@@ -10,5 +10,4 @@ import lombok.Setter;
 public class UnobserveAdvertDTO {
 
     private Long advertId;
-    private String username;
 }

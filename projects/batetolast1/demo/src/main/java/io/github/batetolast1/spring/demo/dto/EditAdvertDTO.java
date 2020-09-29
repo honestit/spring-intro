@@ -12,5 +12,4 @@ public class EditAdvertDTO {
     private Long advertId;
     private String title;
     private String description;
-    private String username;
 }

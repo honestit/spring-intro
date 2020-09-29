@@ -10,5 +10,4 @@ import lombok.Setter;
 public class DeleteAdvertDTO {
 
     private Long advertId;
-    private String username;
 }

@@ -33,8 +33,6 @@
                 <div class="col-2"></div>
                 <div class="col-8">
                     <form method="post" action="${pageContext.request.contextPath}/add-advert">
-                        <input type="hidden" name="username"
-                               value="${pageContext.request.userPrincipal.principal.username}">
                         <div class="form-group">
                             <label for="title">Tytuł</label>
                             <input type="text" required name="title" id="title" class="form-control"
@@ -76,15 +74,13 @@
                     </tr>
                     </thead>
                     <tbody class="text-color-lighter">
-                    <c:forEach var="advertDTO" items="${advertDTOS}" varStatus="counter">
+                    <c:forEach var="advertDTO" items="${advertDTOs}" varStatus="counter">
                         <tr class="d-flex">
                             <td class="col-1">${counter.index + 1}</td>
                             <td class="col-2"><c:out value="${advertDTO.title}"/></td>
                             <td class="col-5"><c:out value="${advertDTO.description}"/></td>
                             <td class="col-2">
                                 <sec:authorize access="isAuthenticated()">
-
-
                                     <a href="/user-adverts/<c:out value="${advertDTO.userId}"/>"><c:out
                                             value="${advertDTO.username}"/></a>
                                 </sec:authorize>
@@ -101,8 +97,6 @@
                                             <form class="form-inline mt-3" method="post"
                                                   action="${pageContext.request.contextPath}/unobserve-advert">
                                                 <input type="hidden" name="advertId" value="${advertDTO.id}">
-                                                <input type="hidden" name="username"
-                                                       value="${pageContext.request.userPrincipal.principal.username}">
                                                 <button class="btn btn-outline-primary" type="submit">Przestań
                                                     obserwować
                                                 </button>
@@ -113,8 +107,6 @@
                                             <form class="form-inline mt-3" method="post"
                                                   action="${pageContext.request.contextPath}/observe-advert">
                                                 <input type="hidden" name="advertId" value="${advertDTO.id}">
-                                                <input type="hidden" name="username"
-                                                       value="${pageContext.request.userPrincipal.principal.username}">
                                                 <button class="btn btn-outline-primary" type="submit">Obserwuj
                                                     ogłoszenie
                                                 </button>

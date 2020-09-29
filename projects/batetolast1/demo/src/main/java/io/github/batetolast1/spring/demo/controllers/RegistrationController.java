@@ -1,7 +1,7 @@
 package io.github.batetolast1.spring.demo.controllers;
 
-import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.dto.RegisterUserDTO;
+import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,6 @@ public class RegistrationController {
 
     @PostMapping // obsługuje żądanie typu POST
     public String processRegistrationPage(RegisterUserDTO registerUserDTO) {
-
         User user = User.builder()
                 .username(registerUserDTO.getUsername())
                 .password(passwordEncoder.encode(registerUserDTO.getPassword()))

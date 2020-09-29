@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,19 +39,19 @@ public class HomePageController {
         List<Advert> adverts = (principal != null) ? advertRepository.findAllByOrderByPostedDesc() : advertRepository.findFirst10ByOrderByPostedDesc();
         log.info("All adverts={}", adverts);
 
-        List<ShowAdvertDTO> advertDTOS = adverts.stream().map(advert -> {
+        List<ShowAdvertDTO> advertDTOs = adverts.stream().map(advert -> {
             ShowAdvertDTO advertDTO = new ShowAdvertDTO();
             advertDTO.setId(advert.getId());
             advertDTO.setTitle(advert.getTitle());
             advertDTO.setDescription(advert.getDescription());
             advertDTO.setUserId(advert.getUser().getId());
             advertDTO.setUsername(advert.getUser().getUsername());
-            advertDTO.setPosted(advert.getPosted());
+            advertDTO.setPosted(advert.getPosted().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
             advertDTO.setCreatedByLoggedUser(loggedUser != null && loggedUser == advert.getUser());
             advertDTO.setObserved(loggedUser != null && loggedUser.getObservedAdverts().contains(advert));
             return advertDTO;
         }).collect(Collectors.toList());
-        model.addAttribute("advertDTOS", advertDTOS);
+        model.addAttribute("advertDTOs", advertDTOs);
 
         return "home-page";
     }
