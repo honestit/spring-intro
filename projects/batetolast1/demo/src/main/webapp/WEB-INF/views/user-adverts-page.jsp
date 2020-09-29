@@ -34,6 +34,7 @@
                         <th class="col-1">ID</th>
                         <th class="col-2">TYTUŁ</th>
                         <th class="col-5">OPIS</th>
+                        <th class="col-2">KATEGORIA</th>
                         <th class="col-2">DODANO</th>
                         <th class="col-2">AKCJE</th>
                     </tr>
@@ -44,6 +45,7 @@
                             <td class="col-1">${counter.index + 1}</td>
                             <td class="col-2"><c:out value="${advertDTO.title}"/></td>
                             <td class="col-5"><c:out value="${advertDTO.description}"/></td>
+                            <td class="col-2"><c:out value="${advertDTO.categoryName}"/></td>
                             <td class="col-2"><c:out value="${advertDTO.posted}"/></td>
                             <td class="col-2">
                                 <c:if test="${advertDTO.createdByLoggedUser}">

@@ -43,6 +43,15 @@
                             <textarea required name="description" id="description" class="form-control"
                                       placeholder="Podaj opis"></textarea>
                         </div>
+                        <div>
+                            <label for="categories">Kategoria:</label>
+                            <select id="categories" name="categoryId">
+                                <c:forEach var="categoryDTO" items="${categoryDTOs}">
+                                    <option value="<c:out value="${categoryDTO.id}"/>"><c:out
+                                            value="${categoryDTO.name}"/></option>
+                                </c:forEach>
+                            </select>
+                        </div>
                         <button class="btn btn-primary" type="submit">Zarejestruj</button>
                         <button class="btn btn-secondary" type="reset">Wyczyść dane</button>
                         <sec:csrfInput/>
@@ -66,6 +75,7 @@
                         <th class="col-1">ID</th>
                         <th class="col-2">TYTUŁ</th>
                         <th class="col-5">OPIS</th>
+                        <th class="col-2">KATEGORIA</th>
                         <th class="col-2">UŻYTKOWNIK</th>
                         <th class="col-2">DODANO</th>
                         <sec:authorize access="isAuthenticated()">
@@ -79,13 +89,14 @@
                             <td class="col-1">${counter.index + 1}</td>
                             <td class="col-2"><c:out value="${advertDTO.title}"/></td>
                             <td class="col-5"><c:out value="${advertDTO.description}"/></td>
+                            <td class="col-2"><c:out value="${advertDTO.categoryName}"/></td>
                             <td class="col-2">
                                 <sec:authorize access="isAuthenticated()">
-                                    <a href="/user-adverts/<c:out value="${advertDTO.userId}"/>"><c:out
-                                            value="${advertDTO.username}"/></a>
+                                    <a href="/user-adverts/<c:out value="${advertDTO.ownerId}"/>"><c:out
+                                            value="${advertDTO.ownerUsername}"/></a>
                                 </sec:authorize>
                                 <sec:authorize access="!isAuthenticated()">
-                                    <c:out value="${advertDTO.username}"/>
+                                    <c:out value="${advertDTO.ownerUsername}"/>
                                 </sec:authorize>
                             </td>
                             <td class="col-2"><c:out value="${advertDTO.posted}"/></td>

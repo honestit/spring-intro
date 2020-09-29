@@ -55,7 +55,7 @@ public class UserAdvertsController {
         model.addAttribute("advertsOwnerDTO", advertsOwnerDTO);
         log.info("Adverts' owner={}", advertsOwner);
 
-        List<Advert> ownersAdverts = advertRepository.findAllByUserOrderByPostedDesc(advertsOwner);
+        List<Advert> ownersAdverts = advertRepository.findAllByOwnerOrderByPostedDesc(advertsOwner);
         log.info("Owner's adverts={}", ownersAdverts);
 
         List<ShowAdvertDTO> ownerAdvertDTOs = ownersAdverts.stream().map(advert -> {
@@ -63,10 +63,11 @@ public class UserAdvertsController {
             advertDTO.setId(advert.getId());
             advertDTO.setTitle(advert.getTitle());
             advertDTO.setDescription(advert.getDescription());
-            advertDTO.setUserId(advert.getUser().getId());
-            advertDTO.setUsername(advert.getUser().getUsername());
+            advertDTO.setOwnerId(advert.getOwner().getId());
+            advertDTO.setOwnerUsername(advert.getOwner().getUsername());
+            advertDTO.setCategoryName(advert.getCategory().getName());
             advertDTO.setPosted(advert.getPosted().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
-            advertDTO.setCreatedByLoggedUser(loggedUser != null && loggedUser == advert.getUser());
+            advertDTO.setCreatedByLoggedUser(loggedUser != null && loggedUser == advert.getOwner());
             advertDTO.setObserved(loggedUser != null && loggedUser.getObservedAdverts().contains(advert));
             return advertDTO;
         }).collect(Collectors.toList());
@@ -86,7 +87,7 @@ public class UserAdvertsController {
             Advert advert = optionalAdvert.get();
             log.info("Advert to delete={}", advert);
 
-            if (loggedUser == advert.getUser()) {
+            if (loggedUser == advert.getOwner()) {
                 advertRepository.delete(advert);
                 log.info("Advert deleted!");
             } else {
@@ -109,7 +110,7 @@ public class UserAdvertsController {
             Advert advert = optionalAdvert.get();
             log.info("Advert to edit={}", advert);
 
-            if (loggedUser != advert.getUser()) {
+            if (loggedUser != advert.getOwner()) {
                 log.info("Advert wasn't created by logged user, can't edit!");
                 return "redirect:/user-adverts";
             }
@@ -137,7 +138,7 @@ public class UserAdvertsController {
             Advert advert = optionalAdvert.get();
             log.info("Advert to edit={}", advert);
 
-            if (loggedUser == advert.getUser()) {
+            if (loggedUser == advert.getOwner()) {
                 advert.setTitle(editAdvertDTO.getTitle());
                 advert.setDescription(editAdvertDTO.getDescription());
                 log.info("Advert to update={}", advert);
@@ -166,10 +167,11 @@ public class UserAdvertsController {
             advertDTO.setId(advert.getId());
             advertDTO.setTitle(advert.getTitle());
             advertDTO.setDescription(advert.getDescription());
-            advertDTO.setUserId(advert.getUser().getId());
-            advertDTO.setUsername(advert.getUser().getUsername());
+            advertDTO.setOwnerId(advert.getOwner().getId());
+            advertDTO.setOwnerUsername(advert.getOwner().getUsername());
+            advertDTO.setCategoryName(advert.getCategory().getName());
             advertDTO.setPosted(advert.getPosted().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
-            advertDTO.setCreatedByLoggedUser(loggedUser == advert.getUser());
+            advertDTO.setCreatedByLoggedUser(loggedUser == advert.getOwner());
             advertDTO.setObserved(loggedUser.getObservedAdverts().contains(advert));
             return advertDTO;
         }).collect(Collectors.toList());
@@ -189,7 +191,7 @@ public class UserAdvertsController {
             Advert advert = optionalAdvert.get();
             log.info("Advert to observe={}", advert);
 
-            if (advert.getUser() != loggedUser) {
+            if (advert.getOwner() != loggedUser) {
                 loggedUser.getObservedAdverts().add(advert);
                 userRepository.save(loggedUser);
                 log.info("Advert observed!");

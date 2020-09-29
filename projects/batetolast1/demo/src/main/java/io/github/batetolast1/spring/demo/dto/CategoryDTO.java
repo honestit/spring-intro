@@ -7,9 +7,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreateAdvertDTO {
+public class CategoryDTO {
 
-    private String title;
-    private String description;
-    private Long categoryId;
+    private Long id;
+    private String name;
 }

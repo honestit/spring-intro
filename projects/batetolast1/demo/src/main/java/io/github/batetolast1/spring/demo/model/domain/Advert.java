@@ -32,5 +32,8 @@ public class Advert {
     private LocalDateTime posted;
 
     @ManyToOne
-    private User user;
+    private User owner;
+
+    @OneToOne
+    private Category category;
 }
