@@ -1,11 +1,9 @@
 package io.github.batetolast1.spring.demo.controllers;
 
 import io.github.batetolast1.spring.demo.dto.RegisterUserDTO;
-import io.github.batetolast1.spring.demo.model.domain.User;
-import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
+import io.github.batetolast1.spring.demo.service.DefaultRegistrationService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j2
 public class RegistrationController {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final DefaultRegistrationService registrationService;
 
     @Autowired
-    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    public RegistrationController(DefaultRegistrationService registrationService) {
+        this.registrationService = registrationService;
     }
 
     @GetMapping
@@ -30,19 +26,9 @@ public class RegistrationController {
         return "registration-form";
     }
 
-    @PostMapping // obsługuje żądanie typu POST
+    @PostMapping
     public String processRegistrationPage(RegisterUserDTO registerUserDTO) {
-        User user = User.builder()
-                .username(registerUserDTO.getUsername())
-                .password(passwordEncoder.encode(registerUserDTO.getPassword()))
-                .firstName(registerUserDTO.getFirstName())
-                .lastName(registerUserDTO.getLastName())
-                .active(true)
-                .build();
-        log.info("User to register: {}", user);
-
-        userRepository.save(user);
-        log.info("Registered user: {}", user);
+        registrationService.register(registerUserDTO);
         return "redirect:/login";
     }
 }
