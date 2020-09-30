@@ -55,7 +55,7 @@ public class UserAdvertsController {
         model.addAttribute("advertsOwnerDTO", advertsOwnerDTO);
         log.info("Adverts' owner={}", advertsOwner);
 
-        List<Advert> ownersAdverts = advertRepository.findAllByOwnerOrderByPostedDesc(advertsOwner);
+        List<Advert> ownersAdverts = advertRepository.findAllByOwnerOrderByCreatedOnDesc(advertsOwner);
         log.info("Owner's adverts={}", ownersAdverts);
 
         List<ShowAdvertDTO> ownerAdvertDTOs = ownersAdverts.stream().map(advert -> {
@@ -66,7 +66,7 @@ public class UserAdvertsController {
             advertDTO.setOwnerId(advert.getOwner().getId());
             advertDTO.setOwnerUsername(advert.getOwner().getUsername());
             advertDTO.setCategoryName(advert.getCategory().getName());
-            advertDTO.setPosted(advert.getPosted().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
+            advertDTO.setPosted(advert.getCreatedOn().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
             advertDTO.setCreatedByLoggedUser(loggedUser != null && loggedUser == advert.getOwner());
             advertDTO.setObserved(loggedUser != null && loggedUser.getObservedAdverts().contains(advert));
             return advertDTO;
@@ -170,7 +170,7 @@ public class UserAdvertsController {
             advertDTO.setOwnerId(advert.getOwner().getId());
             advertDTO.setOwnerUsername(advert.getOwner().getUsername());
             advertDTO.setCategoryName(advert.getCategory().getName());
-            advertDTO.setPosted(advert.getPosted().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
+            advertDTO.setPosted(advert.getCreatedOn().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
             advertDTO.setCreatedByLoggedUser(loggedUser == advert.getOwner());
             advertDTO.setObserved(loggedUser.getObservedAdverts().contains(advert));
             return advertDTO;

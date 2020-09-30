@@ -3,7 +3,6 @@ package io.github.batetolast1.spring.demo.model.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "adverts")
@@ -14,22 +13,14 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = "id")
 
-public class Advert {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Advert extends AbstractEntity {
 
     @Column(nullable = false)
     private String title;
 
     @Column(nullable = false, columnDefinition = "text")
     private String description;
-
-    @Column
-    private LocalDateTime posted;
 
     @ManyToOne
     private User owner;

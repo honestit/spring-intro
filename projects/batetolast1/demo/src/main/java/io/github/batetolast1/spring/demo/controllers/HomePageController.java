@@ -42,7 +42,7 @@ public class HomePageController {
         User loggedUser = (principal != null) ? userRepository.findByUsername(principal.getName()) : null;
         log.info("Logged user={}", loggedUser);
 
-        List<Advert> adverts = (principal != null) ? advertRepository.findAllByOrderByPostedDesc() : advertRepository.findFirst10ByOrderByPostedDesc();
+        List<Advert> adverts = (principal != null) ? advertRepository.findAllByOrderByCreatedOnDesc() : advertRepository.findFirst10ByOrderByCreatedOnDesc();
         log.info("All adverts={}", adverts);
 
         List<ShowAdvertDTO> advertDTOs = adverts.stream().map(advert -> {
@@ -53,7 +53,7 @@ public class HomePageController {
             advertDTO.setOwnerId(advert.getOwner().getId());
             advertDTO.setOwnerUsername(advert.getOwner().getUsername());
             advertDTO.setCategoryName(advert.getCategory().getName());
-            advertDTO.setPosted(advert.getPosted().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
+            advertDTO.setPosted(advert.getCreatedOn().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
             advertDTO.setCreatedByLoggedUser(loggedUser != null && loggedUser == advert.getOwner());
             advertDTO.setObserved(loggedUser != null && loggedUser.getObservedAdverts().contains(advert));
             return advertDTO;

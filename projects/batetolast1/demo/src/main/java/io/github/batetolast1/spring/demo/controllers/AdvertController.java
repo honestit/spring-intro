@@ -40,7 +40,6 @@ public class AdvertController {
         Advert advert = Advert.builder()
                 .title(createAdvertDTO.getTitle())
                 .description(createAdvertDTO.getDescription())
-                .posted(LocalDateTime.now())
                 .owner(loggedUser)
                 .category(category)
                 .build();

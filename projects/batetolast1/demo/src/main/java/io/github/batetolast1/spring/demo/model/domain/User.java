@@ -2,7 +2,10 @@ package io.github.batetolast1.spring.demo.model.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
@@ -14,12 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @ToString(exclude = "password")
-@EqualsAndHashCode(of = "id")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends AbstractEntity {
 
     @Column(unique = true, nullable = false)
     private String username;
