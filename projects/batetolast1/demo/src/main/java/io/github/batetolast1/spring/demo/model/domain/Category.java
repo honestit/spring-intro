@@ -17,6 +17,6 @@ import javax.persistence.Table;
 
 public class Category extends AbstractEntity {
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String name;
 }
