@@ -1,7 +1,7 @@
 package io.github.batetolast1.spring.demo.controllers;
 
 import io.github.batetolast1.spring.demo.dto.RegisterUserDTO;
-import io.github.batetolast1.spring.demo.service.DefaultRegistrationService;
+import io.github.batetolast1.spring.demo.service.impl.DefaultRegistrationService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

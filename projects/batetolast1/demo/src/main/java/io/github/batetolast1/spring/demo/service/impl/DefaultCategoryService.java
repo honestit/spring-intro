@@ -1,8 +1,9 @@
-package io.github.batetolast1.spring.demo.service;
+package io.github.batetolast1.spring.demo.service.impl;
 
 import io.github.batetolast1.spring.demo.dto.CategoryDTO;
 import io.github.batetolast1.spring.demo.model.domain.Category;
 import io.github.batetolast1.spring.demo.model.repositories.CategoryRepository;
+import io.github.batetolast1.spring.demo.service.CategoryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

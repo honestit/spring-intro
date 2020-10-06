@@ -1,4 +1,4 @@
-package io.github.batetolast1.spring.demo.service;
+package io.github.batetolast1.spring.demo.service.impl;
 
 import io.github.batetolast1.spring.demo.dto.CreateAdvertDTO;
 import io.github.batetolast1.spring.demo.dto.ShowAdvertDTO;
@@ -8,8 +8,11 @@ import io.github.batetolast1.spring.demo.model.domain.User;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
 import io.github.batetolast1.spring.demo.model.repositories.CategoryRepository;
 import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
+import io.github.batetolast1.spring.demo.security.AuthenticationFacade;
+import io.github.batetolast1.spring.demo.service.AdvertService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -24,17 +27,19 @@ public class DefaultAdvertService implements AdvertService {
     private final UserRepository userRepository;
     private final AdvertRepository advertRepository;
     private final CategoryRepository categoryRepository;
+    private final AuthenticationFacade authenticationFacade;
 
     @Autowired
-    public DefaultAdvertService(UserRepository userRepository, AdvertRepository advertRepository, CategoryRepository categoryRepository) {
+    public DefaultAdvertService(UserRepository userRepository, AdvertRepository advertRepository, CategoryRepository categoryRepository, AuthenticationFacade authenticationFacade) {
         this.userRepository = userRepository;
         this.advertRepository = advertRepository;
         this.categoryRepository = categoryRepository;
+        this.authenticationFacade = authenticationFacade;
     }
 
     @Override
-    public void addAdvert(CreateAdvertDTO createAdvertDTO, String username) {
-        User loggedUser = getUser(username);
+    public void addAdvert(CreateAdvertDTO createAdvertDTO) {
+        User loggedUser = getUser(currentUsername());
         Category category = getCategory(createAdvertDTO.getCategoryId());
 
         Advert advert = Advert.builder()
@@ -50,8 +55,9 @@ public class DefaultAdvertService implements AdvertService {
     }
 
     @Override
-    public List<ShowAdvertDTO> getAdverts(Principal principal) {
-        return principal == null ? getFirst10Adverts() : getAllAdverts(principal.getName());
+    public List<ShowAdvertDTO> getAdverts() {
+        User loggedUser = getUser(currentUsername());
+        return loggedUser == null ? getFirst10Adverts() : getAllAdverts();
     }
 
     private List<ShowAdvertDTO> getFirst10Adverts() {
@@ -76,8 +82,8 @@ public class DefaultAdvertService implements AdvertService {
                 .collect(Collectors.toList());
     }
 
-    private List<ShowAdvertDTO> getAllAdverts(String username) {
-        User loggedUser = getUser(username);
+    private List<ShowAdvertDTO> getAllAdverts() {
+        User loggedUser = getUser(currentUsername());
         log.info("Logged user={}", loggedUser);
 
         List<Advert> adverts = advertRepository.findAllByOrderByCreatedOnDesc();
@@ -103,6 +109,11 @@ public class DefaultAdvertService implements AdvertService {
 
     private User getUser(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    private String currentUsername() {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        return authentication.getName();
     }
 
     private Category getCategory(Long categoryId) {

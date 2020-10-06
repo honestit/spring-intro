@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AdvertService {
 
-    void addAdvert(CreateAdvertDTO createAdvertDTO, String username);
+    void addAdvert(CreateAdvertDTO createAdvertDTO);
 
-    List<ShowAdvertDTO> getAdverts(Principal principal);
+    List<ShowAdvertDTO> getAdverts();
 }

@@ -2,8 +2,8 @@ package io.github.batetolast1.spring.demo.controllers;
 
 import io.github.batetolast1.spring.demo.dto.CategoryDTO;
 import io.github.batetolast1.spring.demo.dto.ShowAdvertDTO;
-import io.github.batetolast1.spring.demo.service.DefaultAdvertService;
-import io.github.batetolast1.spring.demo.service.DefaultCategoryService;
+import io.github.batetolast1.spring.demo.service.impl.DefaultAdvertService;
+import io.github.batetolast1.spring.demo.service.impl.DefaultCategoryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +30,8 @@ public class HomePageController {
     }
 
     @GetMapping
-    public String prepareHomePage(Principal principal, Model model) {
-        List<ShowAdvertDTO> advertDTOs = defaultAdvertService.getAdverts(principal);
+    public String prepareHomePage(Model model) {
+        List<ShowAdvertDTO> advertDTOs = defaultAdvertService.getAdverts();
         model.addAttribute("advertDTOs", advertDTOs);
         return "home-page";
     }
