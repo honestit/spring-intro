@@ -1,5 +1,6 @@
 package io.github.batetolast1.spring.demo.model.domain;
 
+import io.github.batetolast1.spring.demo.model.domain.enums.AdvertType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,4 +28,7 @@ public class Advert extends AbstractEntity {
 
     @OneToOne
     private Category category;
+
+    @Enumerated(EnumType.STRING)
+    private AdvertType advertType;
 }
