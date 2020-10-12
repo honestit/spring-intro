@@ -23,6 +23,15 @@
                         <span class="text-lg-left">Obserwowane ogłoszenia</span></a>
                 </li>
             </sec:authorize>
+
+            <sec:authorize access="hasRole('ADMIN')">
+                <li class="nav-item active mx-1">
+                    <a class="nav-link btn btn-outline-info" role="button"
+                       href="${pageContext.request.contextPath}/category">
+                        <span class="text-lg-left">Kategorie</span></a>
+                </li>
+            </sec:authorize>
+
         </ul>
     </div>
 

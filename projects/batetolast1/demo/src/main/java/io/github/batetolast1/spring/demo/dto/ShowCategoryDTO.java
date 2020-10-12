@@ -7,8 +7,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CategoryDTO {
+public class ShowCategoryDTO {
 
     private Long id;
     private String name;
+    private Long advertsCount;
+    private boolean allowToDelete;
 }

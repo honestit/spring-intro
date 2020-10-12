@@ -7,6 +7,8 @@ import io.github.batetolast1.spring.demo.dto.ShowUserDTO;
 import io.github.batetolast1.spring.demo.model.domain.Advert;
 import io.github.batetolast1.spring.demo.model.domain.Category;
 import io.github.batetolast1.spring.demo.model.domain.User;
+import io.github.batetolast1.spring.demo.model.domain.enums.AdvertType;
+import io.github.batetolast1.spring.demo.model.domain.enums.CategoryType;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
 import io.github.batetolast1.spring.demo.model.repositories.CategoryRepository;
 import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
@@ -50,6 +52,7 @@ public class DefaultAdvertService implements AdvertService {
                 .description(createAdvertDTO.getDescription())
                 .owner(loggedUser)
                 .category(category)
+                .advertType(AdvertType.ACTIVE)
                 .build();
         log.info("Advert to add to DB: {}", advert);
 
@@ -64,7 +67,7 @@ public class DefaultAdvertService implements AdvertService {
     }
 
     private List<ShowAdvertDTO> getFirst10Adverts() {
-        List<Advert> adverts = advertRepository.findFirst10ByOrderByCreatedOnDesc();
+        List<Advert> adverts = advertRepository.findFirst10ByAdvertTypeOrderByCreatedOnDesc(AdvertType.ACTIVE);
         log.info("First 10 adverts={}", adverts);
 
         return adverts
@@ -89,7 +92,7 @@ public class DefaultAdvertService implements AdvertService {
         User loggedUser = getUser(currentUsername());
         log.info("Logged user={}", loggedUser);
 
-        List<Advert> adverts = advertRepository.findAllByOrderByCreatedOnDesc();
+        List<Advert> adverts = advertRepository.findAllByAdvertTypeOrderByCreatedOnDesc(AdvertType.ACTIVE);
         log.info("All adverts={}", adverts);
 
         return adverts
@@ -121,22 +124,24 @@ public class DefaultAdvertService implements AdvertService {
             return null;
         }
 
-        List<Advert> ownersAdverts = advertRepository.findAllByOwnerOrderByCreatedOnDesc(advertsOwner);
+        List<Advert> ownersAdverts = advertRepository.findAllByOwnerAndAdvertTypeOrderByCreatedOnDesc(advertsOwner, AdvertType.ACTIVE);
         log.info("Owner's adverts={}", ownersAdverts);
 
-        List<ShowAdvertDTO> ownerAdvertDTOs = ownersAdverts.stream().map(advert -> {
-            ShowAdvertDTO advertDTO = new ShowAdvertDTO();
-            advertDTO.setId(advert.getId());
-            advertDTO.setTitle(advert.getTitle());
-            advertDTO.setDescription(advert.getDescription());
-            advertDTO.setOwnerId(advert.getOwner().getId());
-            advertDTO.setOwnerUsername(advert.getOwner().getUsername());
-            advertDTO.setCategoryName(advert.getCategory().getName());
-            advertDTO.setPosted(advert.getCreatedOn().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
-            advertDTO.setCreatedByLoggedUser(loggedUser != null && loggedUser == advert.getOwner());
-            advertDTO.setObserved(loggedUser != null && loggedUser.getObservedAdverts().contains(advert));
-            return advertDTO;
-        }).collect(Collectors.toList());
+        List<ShowAdvertDTO> ownerAdvertDTOs = ownersAdverts.stream()
+                .filter(advert -> advert.getAdvertType() != AdvertType.DELETED)
+                .map(advert -> {
+                    ShowAdvertDTO advertDTO = new ShowAdvertDTO();
+                    advertDTO.setId(advert.getId());
+                    advertDTO.setTitle(advert.getTitle());
+                    advertDTO.setDescription(advert.getDescription());
+                    advertDTO.setOwnerId(advert.getOwner().getId());
+                    advertDTO.setOwnerUsername(advert.getOwner().getUsername());
+                    advertDTO.setCategoryName(advert.getCategory().getName());
+                    advertDTO.setPosted(advert.getCreatedOn().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
+                    advertDTO.setCreatedByLoggedUser(loggedUser != null && loggedUser == advert.getOwner());
+                    advertDTO.setObserved(loggedUser != null && loggedUser.getObservedAdverts().contains(advert));
+                    return advertDTO;
+                }).collect(Collectors.toList());
 
         return ownerAdvertDTOs;
     }
@@ -178,19 +183,21 @@ public class DefaultAdvertService implements AdvertService {
         Set<Advert> observedAdverts = loggedUser.getObservedAdverts();
         log.info("Observed adverts={}", observedAdverts);
 
-        List<ShowAdvertDTO> observedAdvertDTOs = observedAdverts.stream().map(advert -> {
-            ShowAdvertDTO advertDTO = new ShowAdvertDTO();
-            advertDTO.setId(advert.getId());
-            advertDTO.setTitle(advert.getTitle());
-            advertDTO.setDescription(advert.getDescription());
-            advertDTO.setOwnerId(advert.getOwner().getId());
-            advertDTO.setOwnerUsername(advert.getOwner().getUsername());
-            advertDTO.setCategoryName(advert.getCategory().getName());
-            advertDTO.setPosted(advert.getCreatedOn().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
-            advertDTO.setCreatedByLoggedUser(loggedUser == advert.getOwner());
-            advertDTO.setObserved(loggedUser.getObservedAdverts().contains(advert));
-            return advertDTO;
-        }).collect(Collectors.toList());
+        List<ShowAdvertDTO> observedAdvertDTOs = observedAdverts.stream()
+                .filter(advert -> advert.getAdvertType() != AdvertType.DELETED)
+                .map(advert -> {
+                    ShowAdvertDTO advertDTO = new ShowAdvertDTO();
+                    advertDTO.setId(advert.getId());
+                    advertDTO.setTitle(advert.getTitle());
+                    advertDTO.setDescription(advert.getDescription());
+                    advertDTO.setOwnerId(advert.getOwner().getId());
+                    advertDTO.setOwnerUsername(advert.getOwner().getUsername());
+                    advertDTO.setCategoryName(advert.getCategory().getName());
+                    advertDTO.setPosted(advert.getCreatedOn().format(DateTimeFormatter.ofPattern("HH:mm, dd.MM.yyyy")));
+                    advertDTO.setCreatedByLoggedUser(loggedUser == advert.getOwner());
+                    advertDTO.setObserved(loggedUser.getObservedAdverts().contains(advert));
+                    return advertDTO;
+                }).collect(Collectors.toList());
         return observedAdvertDTOs;
     }
 
@@ -199,7 +206,7 @@ public class DefaultAdvertService implements AdvertService {
         User loggedUser = getUser(currentUsername());
         log.info("Logged user={}", loggedUser);
 
-        Optional<Advert> optionalAdvert = advertRepository.findById(id);
+        Optional<Advert> optionalAdvert = advertRepository.findByIdAndAdvertType(id, AdvertType.ACTIVE);
 
         if (optionalAdvert.isPresent()) {
             Advert advert = optionalAdvert.get();
@@ -233,6 +240,6 @@ public class DefaultAdvertService implements AdvertService {
     }
 
     private Category getCategory(Long categoryId) {
-        return categoryRepository.findById(categoryId).orElseThrow(IllegalArgumentException::new);
+        return categoryRepository.findByIdAndCategoryType(categoryId, CategoryType.ACTIVE).orElseThrow(IllegalArgumentException::new);
     }
 }
