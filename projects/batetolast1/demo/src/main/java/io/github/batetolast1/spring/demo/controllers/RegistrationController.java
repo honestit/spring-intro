@@ -1,6 +1,6 @@
 package io.github.batetolast1.spring.demo.controllers;
 
-import io.github.batetolast1.spring.demo.dto.RegisterUserDTO;
+import io.github.batetolast1.spring.demo.dto.UserRegistrationDataDTO;
 import io.github.batetolast1.spring.demo.service.impl.DefaultRegistrationService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,8 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistrationPage(RegisterUserDTO registerUserDTO) {
-        registrationService.register(registerUserDTO);
+    public String processRegistrationPage(UserRegistrationDataDTO userRegistrationDataDTO) {
+        registrationService.register(userRegistrationDataDTO);
         return "redirect:/login";
     }
 }

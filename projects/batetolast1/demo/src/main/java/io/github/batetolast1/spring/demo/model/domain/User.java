@@ -2,7 +2,11 @@ package io.github.batetolast1.spring.demo.model.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,23 +22,18 @@ public class User extends AbstractEntity {
 
     @Column(unique = true, nullable = false)
     private String username;
-
     @Column(nullable = false)
     private String password;
-
     @Column(name = "first_name", nullable = false)
     private String firstName;
-
     @Column(name = "last_name", nullable = false)
     private String lastName;
-
     @Column(nullable = false)
-    private boolean active;
+    private Boolean active = Boolean.FALSE;
 
     @ManyToMany
-    private Set<Advert> observedAdverts;
-
+    private Set<Advert> observedAdverts = new HashSet<>();
     @ManyToMany
     @Singular
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 }

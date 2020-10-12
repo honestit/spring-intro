@@ -1,8 +1,8 @@
 package io.github.batetolast1.spring.demo.service;
 
-import io.github.batetolast1.spring.demo.dto.RegisterUserDTO;
+import io.github.batetolast1.spring.demo.dto.UserRegistrationDataDTO;
 
 public interface RegistrationService {
 
-    void register(RegisterUserDTO userDTO);
+    void register(UserRegistrationDataDTO userDTO);
 }
