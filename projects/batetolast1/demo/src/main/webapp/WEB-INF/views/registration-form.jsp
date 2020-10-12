@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!doctype html>
 <html lang="en">
@@ -28,31 +29,35 @@
         <div class="row">
             <div class="col-1"></div>
             <div class="col-6">
-                <form method="post" action="${pageContext.request.contextPath}/register">
-                    <div class="form-group">
-                        <label for="username">Nazwa użytkownika</label>
-                        <input type="text" required name="username" id="username" class="form-control"
-                               placeholder="Podaj nazwę użytkownika"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstName">Imię</label>
-                        <input type="text" required name="firstName" id="firstName" class="form-control"
-                               placeholder="Podaj imię"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Nazwisko</label>
-                        <input type="text" required name="lastName" id="lastName" class="form-control"
-                               placeholder="Podaj nazwisko"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Hasło</label>
-                        <input type="password" required name="password" id="password" class="form-control"
-                               placeholder="Podaj hasło"/>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Zarejestruj</button>
-                    <button class="btn btn-secondary" type="reset">Wyczyść dane</button>
-                    <sec:csrfInput/>
-                </form>
+                <form:form method="post" modelAttribute="registrationData">
+                    <form method="post" action="${pageContext.request.contextPath}/register">
+                        <div class="form-group">
+                            <form:label path="username">Nazwa użytkownika</form:label>
+                            <form:input path="username" cssClass="form-control" required="true"
+                                        placeholder="Podaj nazwę użytkownika"/>
+                            <form:errors path="username" element="p"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="firstName">Imię</form:label>
+                            <form:input path="firstName" cssClass="form-control" required="true"
+                                        placeholder="Podaj imię"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="lastName">Nazwisko</form:label>
+                            <form:input path="lastName" cssClass="form-control" required="true"
+                                        placeholder="Podaj nazwisko"/>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="password">Hasło</form:label>
+                            <form:password path="password" cssClass="form-control" required="true"
+                                           placeholder="Podaj hasło"/>
+                            <form:errors path="password" element="p"/>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Zarejestruj</button>
+                        <button class="btn btn-secondary" type="reset">Wyczyść dane</button>
+                        <sec:csrfInput/>
+                    </form>
+                </form:form>
             </div>
             <div class="col-5"></div>
         </div>

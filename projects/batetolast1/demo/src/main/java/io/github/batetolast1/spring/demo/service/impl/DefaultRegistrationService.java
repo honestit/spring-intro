@@ -11,8 +11,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
 
 @Service
+@Validated
 @Log4j2
 public class DefaultRegistrationService implements RegistrationService {
 
@@ -33,7 +37,8 @@ public class DefaultRegistrationService implements RegistrationService {
     }
 
     @Override
-    public void register(UserRegistrationDataDTO registrationData) {
+    @Validated
+    public void register(@Valid UserRegistrationDataDTO registrationData) {
         log.debug("Registration data to create user: {}", registrationData);
 
         User user = modelMapper.map(registrationData, User.class);
