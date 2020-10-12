@@ -27,11 +27,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/register").anonymous()
                 .antMatchers("/login").anonymous()
+                .antMatchers("/advert", "/advert/**").hasRole("USER")
+                .antMatchers("/category", "/category/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/")
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
                 .and()
-                .logout().logoutSuccessUrl("/");
+                .logout()
+                .logoutSuccessUrl("/");
     }
 
     @Bean
@@ -45,6 +50,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("SELECT username, password, active FROM users WHERE username = ?")
-                .authoritiesByUsernameQuery("SELECT username, 'ROLE_USER' FROM users WHERE username = ?");
+                .authoritiesByUsernameQuery("SELECT users.username, roles.name FROM users JOIN users_roles ON users_roles.user_id = users.id JOIN roles ON roles.id = users_roles.roles_id WHERE users.username = ?");
     }
 }

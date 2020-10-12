@@ -6,8 +6,8 @@ import io.github.batetolast1.spring.demo.dto.ObserveAdvertDTO;
 import io.github.batetolast1.spring.demo.dto.UnobserveAdvertDTO;
 import io.github.batetolast1.spring.demo.model.domain.Advert;
 import io.github.batetolast1.spring.demo.model.domain.User;
+import io.github.batetolast1.spring.demo.model.domain.enums.AdvertType;
 import io.github.batetolast1.spring.demo.model.repositories.AdvertRepository;
-import io.github.batetolast1.spring.demo.model.repositories.CategoryRepository;
 import io.github.batetolast1.spring.demo.model.repositories.UserRepository;
 import io.github.batetolast1.spring.demo.security.AuthenticationFacade;
 import io.github.batetolast1.spring.demo.service.UserService;
@@ -38,14 +38,19 @@ public class DefaultUserService implements UserService {
         User loggedUser = getUser(currentUsername());
         log.info("Logged user={}", loggedUser);
 
-        Optional<Advert> optionalAdvert = advertRepository.findById(deleteAdvertDTO.getAdvertId());
+        Optional<Advert> optionalAdvert = advertRepository.findByIdAndAdvertType(deleteAdvertDTO.getAdvertId(), AdvertType.ACTIVE);
 
         if (optionalAdvert.isPresent()) {
             Advert advert = optionalAdvert.get();
             log.info("Advert to delete={}", advert);
 
             if (loggedUser == advert.getOwner()) {
-                advertRepository.delete(advert);
+                advert.setTitle("");
+                advert.setDescription("");
+                advert.setOwner(null);
+                advert.setCategory(null);
+                advert.setAdvertType(AdvertType.DELETED);
+                advertRepository.save(advert);
                 log.info("Advert deleted!");
             } else {
                 log.info("Advert wasn't created by logged user, deleting failed!");
@@ -60,7 +65,7 @@ public class DefaultUserService implements UserService {
         User loggedUser = getUser(currentUsername());
         log.info("Logged user={}", loggedUser);
 
-        Optional<Advert> optionalAdvert = advertRepository.findById(editAdvertDTO.getAdvertId());
+        Optional<Advert> optionalAdvert = advertRepository.findByIdAndAdvertType(editAdvertDTO.getAdvertId(), AdvertType.ACTIVE);
 
         if (optionalAdvert.isPresent()) {
             Advert advert = optionalAdvert.get();
@@ -86,7 +91,7 @@ public class DefaultUserService implements UserService {
         User loggedUser = getUser(currentUsername());
         log.info("Logged user={}", loggedUser);
 
-        Optional<Advert> optionalAdvert = advertRepository.findById(observeAdvertDTO.getAdvertId());
+        Optional<Advert> optionalAdvert = advertRepository.findByIdAndAdvertType(observeAdvertDTO.getAdvertId(), AdvertType.ACTIVE);
 
         if (optionalAdvert.isPresent()) {
             Advert advert = optionalAdvert.get();
@@ -109,7 +114,7 @@ public class DefaultUserService implements UserService {
         User loggedUser = getUser(currentUsername());
         log.info("Logged user={}", loggedUser);
 
-        Optional<Advert> optionalAdvert = advertRepository.findById(unobserveAdvertDTO.getAdvertId());
+        Optional<Advert> optionalAdvert = advertRepository.findByIdAndAdvertType(unobserveAdvertDTO.getAdvertId(), AdvertType.ACTIVE);
 
         if (optionalAdvert.isPresent()) {
             Advert advert = optionalAdvert.get();

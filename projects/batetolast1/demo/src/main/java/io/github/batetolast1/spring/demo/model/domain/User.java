@@ -2,10 +2,7 @@ package io.github.batetolast1.spring.demo.model.domain;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -36,4 +33,8 @@ public class User extends AbstractEntity {
 
     @ManyToMany
     private Set<Advert> observedAdverts;
+
+    @ManyToMany
+    @Singular
+    private Set<Role> roles;
 }
