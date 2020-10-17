@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+    <title>Ogłoszenia</title>
+</head>
+<body>
+<div class="container">
+
+    <div class="row" style="margin-top: 40px; margin-bottom: 10px">
+        <div class="col-1"></div>
+        <div class="col-6"><h2>Dodaj ogłoszenie</h2></div>
+        <div class="col-5"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+
+            <%-- Tutaj formularz dodawania nowego ogłoszenia (PÓŹNIEJ) --%>
+
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+    <div class="row" style="margin-top: 40px; margin-bottom: 10px">
+        <div class="col-1"></div>
+        <div class="col-6"><h2>Lista ogłoszeń</h2></div>
+        <div class="col-5"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-12" style="padding-bottom: 20px">
+            <table class="table">
+                <tr>
+                    <th>Lp.</th>
+                    <th>Tytuł</th>
+                    <th>Treść</th>
+                    <th>Autor</th>
+                    <th>Data dodania</th>
+                </tr>
+                <tr th:each="advert, stat : ${adverts}">
+                    <td th:text="${stat.count}">1</td>
+                    <td th:text="${advert.title}">Tytuł</td>
+                    <td th:text="${advert.description}">Treść</td>
+                    <td th:text="${advert.user.username}">Username</td>
+                    <td th:text="${advert.postedFormatted}">yyyy-MM-dd</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+</html>

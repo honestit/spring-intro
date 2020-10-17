@@ -6,8 +6,12 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.sda.projects.adverts.model.domain.Advert;
 import pl.sda.projects.adverts.model.domain.User;
+import pl.sda.projects.adverts.model.repository.AdvertRepository;
 import pl.sda.projects.adverts.model.repository.UserRepository;
+
+import java.time.LocalDateTime;
 
 @Component @Slf4j @RequiredArgsConstructor
 public class StartupDataLoader {
@@ -18,6 +22,7 @@ public class StartupDataLoader {
     // tylko jeden, to Spring automatycznie (magicznie)
     // używa go do wstrzykiwania zależności
     private final UserRepository userRepository;
+    private final AdvertRepository advertRepository;
     private final PasswordEncoder passwordEncoder;
 
     @EventListener
@@ -29,6 +34,26 @@ public class StartupDataLoader {
                 .username("andrzej")
                 .password(passwordEncoder.encode("andrzej"))
                 .active(true)
+                .build());
+
+        User andrzej = userRepository.getByUsername("andrzej");
+        advertRepository.save(Advert.builder()
+                .title("Kupię psa")
+                .description("Kupię ładnego, spokojnego psa")
+                .user(andrzej)
+                .posted(LocalDateTime.now())
+                .build());
+        advertRepository.save(Advert.builder()
+                .title("Oddam mieszkanie")
+                .description("Oddam mieszkanie w centrum")
+                .user(andrzej)
+                .posted(LocalDateTime.now().minusDays(1))
+                .build());
+        advertRepository.save(Advert.builder()
+                .title("Zjem drzewo")
+                .description("Zjem dowolne drzewo do 2m średnicy!")
+                .user(andrzej)
+                .posted(LocalDateTime.now().minusDays(1).minusHours(4))
                 .build());
         log.info("Startup data loaded");
     }

@@ -5,6 +5,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity @Table(name = "adverts")
 @Getter @Setter @ToString(exclude = "user") @EqualsAndHashCode(of = "id")
@@ -31,4 +32,8 @@ public class Advert {
 
     @Column(name = "user_id", insertable = false, updatable = false)
     private Long userId;
+
+    public String getPostedFormatted() {
+        return posted.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
 }
