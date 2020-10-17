@@ -3,6 +3,7 @@ package pl.sda.projects.adverts.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,10 +19,12 @@ import pl.sda.projects.adverts.model.repository.UserRepository;
 public class RegistrationController {
 
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired // userRepostiory będzie wstrzyknięte teraz przez Springa, hahahaha!!!
-    public RegistrationController(UserRepository userRepository) {
+    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -38,7 +41,7 @@ public class RegistrationController {
                                           ModelMap model) {
         User user = User.builder()
                 .username(username)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .firstName(firstName)
                 .lastName(lastName).build();
 
