@@ -31,14 +31,13 @@
         <div class="col-2"></div>
         <div class="col-8">
 
-            <form method="post" action="/add-advert">
-                <label>Tytuł
-                    <input type="text" name="title" id="title" value=""/>
+            <form method="post" th:action="@{/add-advert}" th:object="${advertToAdd}">
+                <label>Tytuł:
+                    <input type="text" th:field="*{title}"/>
                 </label><br/>
                 <label>Treść:
-                    <textarea rows="6" cols="80" name="description" id="description"></textarea>
+                    <textarea rows="6" cols="80" th:field="*{description}"></textarea>
                 </label><br/>
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 <button type="submit">Dodaj</button>
             </form>
 
@@ -62,9 +61,9 @@
                     <th>Autor</th>
                     <th>Data dodania</th>
                 </tr>
-                <tr th:each="advert, stat : ${adverts}">
+                <tr th:each="advert, stat : ${adverts}" th:object="${advert}">
                     <td th:text="${stat.count}">1</td>
-                    <td th:text="${advert.title}">Tytuł</td>
+                    <td th:text="*{title}">Tytuł</td>
                     <td th:text="${advert.description}">Treść</td>
                     <td th:text="${advert.user.username}">Username</td>
                     <td th:text="${advert.postedFormatted}">yyyy-MM-dd</td>
